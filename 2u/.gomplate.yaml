@@ -1,0 +1,16 @@
+inputFiles:
+  - templates/2u.yml.tmpl
+execPipe: true
+postExec:
+  - ct
+  - --out-file
+  - ignition.json
+context:
+  values:
+    url: values.yaml
+  global:
+    url: ../global.yaml
+
+templates:
+  - systemd=templates/systemd/
+  - files=templates/files/

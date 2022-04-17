@@ -1,0 +1,12 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart={{ .values.docker.compose.dir }}/docker-compose up -d
+User={{ .values.docker.user }}
+Group={{ .values.docker.user }}
+WorkingDirectory={{ .values.docker.compose.dir }}
+
+[Install]
+WantedBy=multi-user.target

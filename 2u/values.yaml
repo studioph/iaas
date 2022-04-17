@@ -1,0 +1,20 @@
+disks:
+  ssd1: ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W
+  ssd2: ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K
+docker:
+  compose:
+    dir: /tmp
+    version: v2.4.1
+  user: core
+raid:
+  name: docker
+wipe:
+  partition: true
+  filesystem: false
+network:
+  g1:
+    name: enp3s0
+    ip: 10.0.1.3/24
+  g10:
+    name: enp1s0
+    ip: 10.0.10.3/24

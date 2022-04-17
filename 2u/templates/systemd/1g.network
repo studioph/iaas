@@ -1,0 +1,7 @@
+[Match]
+Name={{ .values.network.g1.name }}
+
+[Network]
+DNS={{ .global.network.dns }}
+Address={{ .values.network.g1.ip }}
+Gateway={{ .global.network.gateway }}

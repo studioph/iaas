@@ -1,0 +1,5 @@
+[Match]
+Name={{ .values.network.g10.name }}
+
+[Network]
+Address={{ .values.network.g10.ip }}
