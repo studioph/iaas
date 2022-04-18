@@ -17,15 +17,13 @@ storage:
       wipe_table: {{ .values.wipe.partition }}
       partitions:
         - label: docker1
-          type_guid: raid_partition
     - device: /dev/disk/by-id/{{ .values.disks.ssd2 }}
       wipe_table: {{ .values.wipe.partition }}
       partitions:
         - label: docker2
-          type_guid: raid_partition
   raid:
     - name: {{ .values.raid.name }}
-      level: raid1
+      level: mirror
       devices:
         - /dev/disk/by-id/{{ .values.disks.ssd1 }}-part1
         - /dev/disk/by-id/{{ .values.disks.ssd2 }}-part1

@@ -3,7 +3,7 @@ disks:
   ssd2: ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K
 docker:
   compose:
-    dir: /tmp
+    dir: /home/core
     version: v2.4.1
   user: core
 raid:

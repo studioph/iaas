@@ -3,6 +3,7 @@ inputFiles:
 execPipe: true
 postExec:
   - ct
+  - --pretty
   - --out-file
   - ignition.json
 context:
