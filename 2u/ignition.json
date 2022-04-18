@@ -73,7 +73,7 @@
           "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer/compose.yml",
           "verification": {}
         },
-        "mode": 765
+        "mode": 436
       },
       {
         "filesystem": "root",
@@ -88,7 +88,7 @@
           "source": "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64",
           "verification": {}
         },
-        "mode": 755
+        "mode": 493
       }
     ],
     "filesystems": [
