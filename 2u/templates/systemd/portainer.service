@@ -3,7 +3,8 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStart={{ .values.docker.compose.dir }}/docker-compose up -d
+Environment="COMPOSE_PROJECT_NAME=portainer"
+ExecStart={{ .values.docker.compose.dir }}/docker-compose up --detach
 User={{ .values.docker.user }}
 Group={{ .values.docker.user }}
 WorkingDirectory={{ .values.docker.compose.dir }}
