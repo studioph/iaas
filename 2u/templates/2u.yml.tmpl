@@ -74,3 +74,6 @@ networkd:
     - name: 00-10g-static.network
       contents: |
 {{ tmpl.Exec "systemd/10g.network" . | indent 8 }}
+    - name: 00-1g-patch.link
+      contents: |
+{{ tmpl.Exec "systemd/1g-patch.link" . | indent 8 }}

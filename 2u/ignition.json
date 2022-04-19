@@ -14,8 +14,12 @@
         "name": "00-1g-static.network"
       },
       {
-        "contents": "[Match]\nName=enp1s0\n\n[Network]\nAddress=10.0.10.3/24",
+        "contents": "[Match]\nName=enp1s0\n\n[Network]\nAddress=10.0.10.3/24\n",
         "name": "00-10g-static.network"
+      },
+      {
+        "contents": "[Match]\nMACAddress=18:c0:4d:e0:80:28\n\n[Link]\nNamePolicy=kernel database onboard slot path\nMACAddressPolicy=persistent\nWakeOnLan=magic",
+        "name": "00-1g-patch.link"
       }
     ]
   },
@@ -124,7 +128,7 @@
         "name": "var-lib-docker.mount"
       },
       {
-        "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nExecStart=/home/core/docker-compose up -d\nUser=core\nGroup=core\nWorkingDirectory=/home/core\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nExecStart=/home/core/docker-compose up --detach\nUser=core\nGroup=core\nWorkingDirectory=/home/core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
       }
