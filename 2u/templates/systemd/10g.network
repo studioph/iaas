@@ -1,5 +1,5 @@
 [Match]
-Name={{ .values.network.g10.name }}
+MACAddress={{ .values.network.g10.mac }}
 
 [Network]
 Address={{ .values.network.g10.ip }}
