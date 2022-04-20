@@ -18,3 +18,7 @@ network:
   g10:
     ip: 10.0.10.3/24
     mac: e4:1d:2d:7e:f4:c0
+kmods:
+  overlay:
+    upper: /opt/overlay/modules
+    lower: /usr/lib/modules

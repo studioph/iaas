@@ -1,0 +1,13 @@
+[Unit]
+Before=local-fs.target
+ConditionPathExists={{ .values.kmods.overlay.upper }}
+ConditionPathExists={{ .values.kmods.overlay.upper }}.wd
+
+[Mount]
+Type=overlay
+What=overlay
+Where={{ .values.kmods.overlay.lower }}
+Options=lowerdir={{ .values.kmods.overlay.lower }},upperdir={{ .values.kmods.overlay.upper }},workdir={{ .values.kmods.overlay.upper }}.wd
+
+[Install]
+WantedBy=local-fs.target

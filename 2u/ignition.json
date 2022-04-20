@@ -93,6 +93,15 @@
           "verification": {}
         },
         "mode": 493
+      },
+      {
+        "filesystem": "root",
+        "path": "/opt/flatcar-forklift/forklift.sh",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh",
+          "verification": {}
+        },
+        "mode": 420
       }
     ],
     "filesystems": [
@@ -131,6 +140,15 @@
         "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nExecStart=/home/core/docker-compose up --detach\nUser=core\nGroup=core\nWorkingDirectory=/home/core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
+      },
+      {
+        "contents": "[Unit]\nBefore=local-fs.target\nConditionPathExists=/opt/overlay/modules\nConditionPathExists=/opt/overlay/modules.wd\n\n[Mount]\nType=overlay\nWhat=overlay\nWhere=/usr/lib/modules\nOptions=lowerdir=/usr/lib/modules,upperdir=/opt/overlay/modules,workdir=/opt/overlay/modules.wd\n\n[Install]\nWantedBy=local-fs.target\n",
+        "enabled": true,
+        "name": "usr-lib-modules.mount"
+      },
+      {
+        "contents": "[Unit]\nDescription=Compile Kernel Modules for Flatcar\nRequires=docker.service network-online.target update-engine.service usr-lib64-modules.mount\nAfter=docker.service network-online.target update-engine.service usr-lib-modules.mount\n\n[Service]\nEnvironmentFile=/usr/share/coreos/release\nEnvironmentFile=/usr/share/coreos/update.conf\nEnvironment=FORKLIFT_BIN_DIR=/opt/flatcar-forklift\n\nType=oneshot\nRemainAfterExit=yes\nExecStart=-/bin/bash -c \"${FORKLIFT_BIN_DIR}/forklift.sh %i\"\nTimeoutStopSec=infinity\n\n[Install]\nWantedBy=multi-user.target\n",
+        "name": "forklift@.service"
       }
     ]
   }
