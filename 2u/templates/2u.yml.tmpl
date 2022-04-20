@@ -41,6 +41,11 @@ storage:
         format: ext4
         wipe_filesystem: {{ .values.wipe.filesystem }}
         label: docker
+  directories:
+    - path: {{ .values.kmods.overlay.upper }}
+      filesystem: root
+    - path: {{ .values.kmods.overlay.upper }}.wd
+      filesystem: root
   files:
     - path: /etc/ssh/sshd_config
       filesystem: root

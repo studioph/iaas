@@ -34,6 +34,18 @@
     ]
   },
   "storage": {
+    "directories": [
+      {
+        "filesystem": "root",
+        "path": "/opt/overlay/modules",
+        "mode": 493
+      },
+      {
+        "filesystem": "root",
+        "path": "/opt/overlay/modules.wd",
+        "mode": 493
+      }
+    ],
     "disks": [
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W",
