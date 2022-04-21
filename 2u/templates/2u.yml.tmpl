@@ -90,6 +90,9 @@ storage:
     - path: /etc/coreos/update.conf
       filesystem: root
       target: /usr/share/coreos/update.conf
+    - path: /etc/systemd/system/multi-user.target.wants/forklift@nvidia.service
+      filesystem: root
+      target: /etc/systemd/system/forklift@.service
 passwd:
   users:
     - name: core
