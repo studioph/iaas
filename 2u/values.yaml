@@ -21,4 +21,4 @@ network:
 kmods:
   overlay:
     upper: /opt/overlay/modules
-    lower: /usr/lib/modules
+    lower: /usr/lib64/modules

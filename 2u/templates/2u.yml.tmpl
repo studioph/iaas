@@ -11,7 +11,7 @@ systemd:
       enabled: true
       contents: |
 {{ tmpl.Exec "systemd/portainer.service" . | indent 8 }}
-    - name: usr-lib-modules.mount
+    - name: usr-lib64-modules.mount
       enabled: true
       contents: |
 {{ tmpl.Exec "systemd/modules.mount" . | indent 8 }}
