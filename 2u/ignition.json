@@ -113,7 +113,7 @@
           "source": "https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh",
           "verification": {}
         },
-        "mode": 420
+        "mode": 493
       }
     ],
     "filesystems": [
@@ -159,7 +159,7 @@
         "name": "usr-lib64-modules.mount"
       },
       {
-        "contents": "[Unit]\nDescription=Compile Kernel Modules for Flatcar\nRequires=docker.service network-online.target update-engine.service usr-lib64-modules.mount\nAfter=docker.service network-online.target update-engine.service usr-lib-modules.mount\n\n[Service]\nEnvironmentFile=/usr/share/coreos/release\nEnvironmentFile=/usr/share/coreos/update.conf\nEnvironment=FORKLIFT_BIN_DIR=/opt/flatcar-forklift\n\nType=oneshot\nRemainAfterExit=yes\nExecStart=-/bin/bash -c \"${FORKLIFT_BIN_DIR}/forklift.sh %i\"\nTimeoutStopSec=infinity\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Compile Kernel Modules for Flatcar\nRequires=docker.service network-online.target update-engine.service usr-lib64-modules.mount\nAfter=docker.service network-online.target update-engine.service usr-lib64-modules.mount\n\n[Service]\nEnvironmentFile=/usr/share/coreos/release\nEnvironmentFile=/usr/share/coreos/update.conf\nEnvironment=FORKLIFT_BIN_DIR=/opt/flatcar-forklift\n\nType=oneshot\nRemainAfterExit=yes\nExecStart=-/bin/bash -c \"${FORKLIFT_BIN_DIR}/forklift.sh %i\"\nTimeoutStopSec=infinity\n\n[Install]\nWantedBy=multi-user.target\n",
         "name": "forklift@.service"
       }
     ]

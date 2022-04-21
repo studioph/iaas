@@ -75,6 +75,7 @@ storage:
           url: https://github.com/docker/compose/releases/download/{{ .values.docker.compose.version }}/docker-compose-linux-x86_64
     - path: /opt/flatcar-forklift/forklift.sh
       filesystem: root
+      mode: 0755
       contents:
         remote:
           url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh
