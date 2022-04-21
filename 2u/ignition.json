@@ -144,6 +144,13 @@
         "name": "docker"
       }
     ],
+    "links": [
+      {
+        "filesystem": "root",
+        "path": "/etc/coreos/update.conf",
+        "target": "/usr/share/coreos/update.conf"
+      }
+    ],
     "raid": [
       {
         "devices": [

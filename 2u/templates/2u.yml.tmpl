@@ -86,6 +86,10 @@ storage:
       contents:
         remote:
           url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount
+  links:
+    - path: /etc/coreos/update.conf
+      filesystem: root
+      target: /usr/share/coreos/update.conf
 passwd:
   users:
     - name: core
