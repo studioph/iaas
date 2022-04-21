@@ -13,11 +13,8 @@ systemd:
 {{ tmpl.Exec "systemd/portainer.service" . | indent 8 }}
     - name: usr-lib64-modules.mount
       enabled: true
-      contents: |
-{{ tmpl.Exec "systemd/modules.mount" . | indent 8 }}
-    - name: forklift@.service
-      contents: |
-{{ tmpl.Exec "systemd/forklift.service" . | indent 8 }}
+    - name: forklift@nvidia.service
+      enabled: true
 storage:
   disks:
     - device: /dev/disk/by-id/{{ .values.disks.ssd1 }}
@@ -79,6 +76,16 @@ storage:
       contents:
         remote:
           url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh
+    - path: /etc/systemd/system/forklift@.service
+      filesystem: root
+      contents:
+        remote:
+          url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift%40.service
+    - path: /etc/systemd/system/usr-lib64-modules.mount
+      filesystem: root
+      contents:
+        remote:
+          url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount
 passwd:
   users:
     - name: core
