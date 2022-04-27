@@ -86,6 +86,11 @@ storage:
       contents:
         remote:
           url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount
+    - path: /etc/hostname
+      filesystem: root
+      mode: 0644
+      contents:
+        inline: flatcar
   links:
     - path: /etc/coreos/update.conf
       filesystem: root

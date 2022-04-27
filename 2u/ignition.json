@@ -132,6 +132,15 @@
           "verification": {}
         },
         "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,flatcar",
+          "verification": {}
+        },
+        "mode": 420
       }
     ],
     "filesystems": [
