@@ -1,0 +1,7 @@
+#!ipxe
+
+set base-url https://stable.release.flatcar-linux.net/amd64-usr/current
+
+kernel ${base-url}/flatcar_production_pxe.vmlinuz initrd=flatcar_production_pxe_image.cpio.gz flatcar.config.url=https://raw.githubusercontent.com/paulhutchings/flatcar/main/${mac:hexhyp}/ignition.json flatcar.first_boot=yes console=tty0 console=ttyS0,115200n8 ipv6.disable=1
+initrd ${base-url}/flatcar_production_pxe_image.cpio.gz
+boot
