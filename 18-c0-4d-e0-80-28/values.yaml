@@ -1,16 +1,67 @@
-disks:
-  ssd1: ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W
-  ssd2: ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K
 docker:
-  compose:
-    dir: /home/core
-    version: v2.4.1
   user: core
-raid:
-  name: docker
-wipe:
-  partition: true
-  filesystem: false
+  compose:
+    path: &compose-path /opt/bin/docker-compose
+    stacks:
+      portainer: &portainer-file /opt/docker-compose/portainer.yml
+
+systemd:
+  units:
+    - name: docker.service
+    - name: var-lib-docker.mount
+      contents: systemd/docker.mount
+    - name: portainer.service
+      contents: systemd/portainer.service
+    - name: usr-lib64-modules.mount
+    - name: forklift@nvidia.service
+
+storage:
+  disks:
+    - device: &docker1 ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W
+    - device: &docker2 ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K
+  raid:
+    docker:
+      level: mirror
+      disks:
+        - *docker1
+        - *docker2
+  filesystems:
+    docker:
+      label: docker
+      device: /dev/md/docker
+  files:
+    remote:
+      - path: *portainer-file
+        mode: 0664
+        url: https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml
+      - path: *compose-path
+        mode: 0755
+        url: https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64
+      - path: /opt/flatcar-forklift/forklift.sh
+        mode: 0755
+        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh
+      - path: /etc/systemd/system/forklift@.service
+        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift%40.service
+      - path: /etc/systemd/system/usr-lib64-modules.mount
+        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount
+  links:
+    - path: /etc/coreos/update.conf
+      target: /usr/share/coreos/update.conf
+    - path: /etc/systemd/system/multi-user.target.wants/forklift@nvidia.service
+      target: /etc/systemd/system/forklift@.service
+  folders:
+    - path: /opt/overlay/modules
+    - path: /opt/overlay/modules.wd
+
+networkd:
+  units:
+    - name: 00-1g-static.network
+      contents: systemd/1g.network
+    - name: 00-10g-static.network
+      contents: systemd/10g.network
+    - name: 00-1g-patch.link
+      contents: systemd/1g-patch.link
+
 network:
   g1:
     ip: 10.0.1.3/24
@@ -18,7 +69,3 @@ network:
   g10:
     ip: 10.0.10.3/24
     mac: e4:1d:2d:7e:f4:c0
-kmods:
-  overlay:
-    upper: /opt/overlay/modules
-    lower: /usr/lib64/modules

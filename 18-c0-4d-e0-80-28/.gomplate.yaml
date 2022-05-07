@@ -1,5 +1,5 @@
 inputFiles:
-  - templates/2u.yml.tmpl
+  - templates/2u.yml.tpl
 execPipe: true
 postExec:
   - ct

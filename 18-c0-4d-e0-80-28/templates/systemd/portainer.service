@@ -4,10 +4,10 @@ Requires=docker.service
 
 [Service]
 Environment="COMPOSE_PROJECT_NAME=portainer"
-ExecStart={{ .values.docker.compose.dir }}/docker-compose up --detach
+Environment="COMPOSE_FILE={{ .values.docker.compose.stacks.portainer }}"
+ExecStart={{ .values.docker.compose.path }} up --detach
 User={{ .values.docker.user }}
 Group={{ .values.docker.user }}
-WorkingDirectory={{ .values.docker.compose.dir }}
 
 [Install]
 WantedBy=multi-user.target

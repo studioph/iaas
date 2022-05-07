@@ -1,10 +1,11 @@
+{{- $fs := .values.storage.filesystems.docker -}}
 [Unit]
 Before=local-fs.target
 
 [Mount]
-What=/dev/md/{{ .values.raid.name }}
+What={{ $fs.device }}
 Where=/var/lib/docker
-Type=ext4
+Type={{ index $fs "format" | default .global.defaults.storage.format }}
 
 [Install]
 WantedBy=local-fs.target

@@ -49,20 +49,10 @@
     "disks": [
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W",
-        "partitions": [
-          {
-            "label": "docker1"
-          }
-        ],
         "wipeTable": true
       },
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K",
-        "partitions": [
-          {
-            "label": "docker2"
-          }
-        ],
         "wipeTable": true
       }
     ],
@@ -78,28 +68,16 @@
       },
       {
         "filesystem": "root",
-        "group": {
-          "name": "core"
-        },
-        "path": "/home/core/compose.yml",
-        "user": {
-          "name": "core"
-        },
+        "path": "/opt/docker-compose/portainer.yml",
         "contents": {
-          "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer/compose.yml",
+          "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml",
           "verification": {}
         },
         "mode": 436
       },
       {
         "filesystem": "root",
-        "group": {
-          "name": "core"
-        },
-        "path": "/home/core/docker-compose",
-        "user": {
-          "name": "core"
-        },
+        "path": "/opt/bin/docker-compose",
         "contents": {
           "source": "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64",
           "verification": {}
@@ -188,7 +166,7 @@
         "name": "var-lib-docker.mount"
       },
       {
-        "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nExecStart=/home/core/docker-compose up --detach\nUser=core\nGroup=core\nWorkingDirectory=/home/core\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
       },
