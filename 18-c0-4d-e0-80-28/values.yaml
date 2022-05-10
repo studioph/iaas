@@ -16,9 +16,14 @@ systemd:
     - name: forklift@nvidia.service
 
 storage:
+  label: &docker-label docker
   disks:
     - device: &docker1 ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W
+      partitions:
+        - label: *docker-label
     - device: &docker2 ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K
+      partitions:
+        - label: *docker-label
   raid:
     docker:
       level: mirror
@@ -27,7 +32,7 @@ storage:
         - *docker2
   filesystems:
     docker:
-      label: docker
+      label: *docker-label
       device: /dev/md/docker
   files:
     remote:

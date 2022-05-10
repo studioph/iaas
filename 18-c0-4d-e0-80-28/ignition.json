@@ -49,10 +49,20 @@
     "disks": [
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W",
+        "partitions": [
+          {
+            "label": "docker"
+          }
+        ],
         "wipeTable": true
       },
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANB0J507595K",
+        "partitions": [
+          {
+            "label": "docker"
+          }
+        ],
         "wipeTable": true
       }
     ],

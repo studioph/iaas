@@ -14,6 +14,10 @@ storage:
   {{- range .values.storage.disks }}
     - device: /dev/disk/by-id/{{ .device }}
       wipe_table: {{ index . "wipe" | default $.global.defaults.wipe.partition }}
+      partitions:
+      {{- range .partitions }}
+        - label: {{ .label }}
+      {{- end }}
   {{- end }}
   raid:
   {{- range $key, $value := .values.storage.raid }}
