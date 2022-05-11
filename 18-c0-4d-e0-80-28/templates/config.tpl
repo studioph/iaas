@@ -8,6 +8,14 @@ systemd:
       contents: |
 {{ tmpl.Exec .contents $ | indent 8 }}
     {{- end }}
+    {{- if has . "dropins" }}
+      dropins:
+      {{- range .dropins }}
+        - name: {{ .name }}
+          contents: |
+{{ tmpl.Exec .contents $ | indent 12 }}
+      {{- end }}
+    {{- end }}  
   {{- end }}
 storage:
   disks:
@@ -65,7 +73,7 @@ storage:
       filesystem: root
       mode: 0644
       contents:
-        inline: flatcar
+        inline: {{ .values.hostname }}
   links:
   {{- range .values.storage.links }}
     - path: {{ .path }}

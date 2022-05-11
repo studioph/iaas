@@ -167,6 +167,12 @@
   "systemd": {
     "units": [
       {
+        "dropins": [
+          {
+            "contents": "[Unit]\nAfter=nslookup.service\n",
+            "name": "00-wait-dns.conf"
+          }
+        ],
         "enabled": true,
         "name": "docker.service"
       },
@@ -176,7 +182,7 @@
         "name": "var-lib-docker.mount"
       },
       {
-        "contents": "[Unit]\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initialize Portainer\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
       },
@@ -187,6 +193,11 @@
       {
         "enabled": true,
         "name": "forklift@nvidia.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Wait for DNS resolution\nAfter=nss-lookup.target\nRequires=nss-lookup.target\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/nslookup flatcar.studiop\n\n[Install]\nRequiredBy=docker.service\n",
+        "enabled": true,
+        "name": "nslookup.service"
       }
     ]
   }

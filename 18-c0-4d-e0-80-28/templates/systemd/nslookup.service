@@ -1,0 +1,11 @@
+[Unit]
+Description=Wait for DNS resolution
+After=nss-lookup.target
+Requires=nss-lookup.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nslookup {{ .values.hostname }}.studiop
+
+[Install]
+RequiredBy=docker.service

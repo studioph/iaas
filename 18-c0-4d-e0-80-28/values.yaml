@@ -8,12 +8,17 @@ docker:
 systemd:
   units:
     - name: docker.service
+      dropins:
+        - name: 00-wait-dns.conf
+          contents: systemd/docker-wait-dns.conf
     - name: var-lib-docker.mount
       contents: systemd/docker.mount
     - name: portainer.service
       contents: systemd/portainer.service
     - name: usr-lib64-modules.mount
     - name: forklift@nvidia.service
+    - name: nslookup.service
+      contents: systemd/nslookup.service
 
 storage:
   label: &docker-label docker
@@ -74,3 +79,5 @@ network:
   g10:
     ip: 10.0.10.3/24
     mac: e4:1d:2d:7e:f4:c0
+
+hostname: flatcar
