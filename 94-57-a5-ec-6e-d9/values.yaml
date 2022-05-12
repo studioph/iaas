@@ -14,3 +14,5 @@ network:
     mac: 00:e0:4c:51:22:17
 butane:
   version: 1.4.0
+selinux:
+  state: permissive

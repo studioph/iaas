@@ -35,6 +35,12 @@ storage:
       mode: 0644
       contents:
         inline: coreos
+    - path: /etc/selinux/config
+      mode: 0600
+      overwrite: true
+      contents:
+        inline: |
+{{ tmpl.Exec "files/selinux.config" . | indent 10 }}
 systemd:
   units:
     - name: docker.service

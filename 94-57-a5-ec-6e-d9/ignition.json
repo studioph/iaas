@@ -62,6 +62,15 @@
           "source": "data:,coreos"
         },
         "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/selinux/config",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/3SQz2pyMRTE9z7FgNtPH+CDLl0UrBS00C7TZPQeGnMuOedqfftyteYWSrPKnzPzm8kcu04Me8lE1OJVs8E7wjw4oXtsV2spwye03O4v5jwuZ/Px4XHz8vqAGAo8fBBargrvaIR3lcQp5IH2fzbHbbHstUYpByyaszEOVfyCXrPEC8S+x5iWTdizHsVMTvyh7KsUN5xDLVIOBinmDGkM0UCTRRIL75kJC2x08mjQrCGNyHuxCTm13b09r/5sfNZffT3UA/3K3N23fdVIMxpC5XhyRmf610THbFjgacguWPPEjG37otu0aGk5r5HunNlXAAAA//9vql2W0QEAAA=="
+        },
+        "mode": 384
       }
     ],
     "filesystems": [
