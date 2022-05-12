@@ -51,13 +51,6 @@
           "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
         },
         "mode": 384
-      },
-      {
-        "path": "/etc/ssh/sshd_config",
-        "contents": {
-          "source": "data:,UsePrivilegeSeparation%20sandbox%0ASubsystem%20sftp%20internal-sftp%0AUseDNS%20no%0A%0APermitRootLogin%20no%0AAllowUsers%20core%0AAuthenticationMethods%20publickey%0A"
-        },
-        "mode": 384
       }
     ],
     "filesystems": [
@@ -79,6 +72,15 @@
       {
         "enabled": true,
         "name": "docker.service"
+      },
+      {
+        "dropins": [
+          {
+            "contents": "[Service]\n# Override Execstart in main unit\nExecStart=\n# Add new Execstart with `-` prefix to ignore failure`\nExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM\n",
+            "name": "autologin-core.conf"
+          }
+        ],
+        "name": "serial-getty@ttyS0.service"
       }
     ]
   }

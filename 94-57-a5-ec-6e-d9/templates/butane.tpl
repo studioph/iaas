@@ -31,16 +31,20 @@ storage:
       contents:
         inline: |
 {{ tmpl.Exec "files/10g.network" . | indent 10 }}
-    - path: /etc/ssh/sshd_config
-      mode: 0600
-      contents:
-        inline: |
-{{ tmpl.Exec "files/sshd_config" . | indent 10 }}
 
 systemd:
   units:
     - name: docker.service
       enabled: true
+    - name: serial-getty@ttyS0.service
+      dropins:
+      - name: autologin-core.conf
+        contents: |
+          [Service]
+          # Override Execstart in main unit
+          ExecStart=
+          # Add new Execstart with `-` prefix to ignore failure`
+          ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
 
 passwd:
   users:
