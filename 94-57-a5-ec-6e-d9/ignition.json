@@ -39,17 +39,16 @@
         }
       },
       {
-        "path": "/etc/NetworkManager/system-connections/eth1g.nmconnection",
+        "path": "/etc/NetworkManager/system-connections/eno1.nmconnection",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/0TKQQrDIBCF4f3cpVaLaYngScTFoI/URTXopCW3L4WU7B7v/0JqtSJJaTVSyR7yNAvJvuI30SuEeJN2MC99A1H4t0gvThfOuWMMP1s3PRxPDsnd4fJMFMr6tpFyHd5opZVRhg6O89LXm6WFBR/eT/cNAAD//8OD9secAAAA"
+          "source": "data:,%5Bconnection%5D%0Aid%3Deno1%0Atype%3Dethernet%0Aautoconnect%3Dtrue%0Ainterface-name%3Deno1%0A%0A%5Bipv4%5D%0Adns%3D10.0.1.1%0Aaddress1%3D10.0.1.10%2F24%0Agateway%3D10.0.1.1%0Amethod%3Dmanual%0A"
         },
         "mode": 384
       },
       {
-        "path": "/etc/NetworkManager/system-connections/eth10g.nmconnection",
+        "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPWV0aDEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzMT0xMC4wLjEwLjEwLzI0Cm1ldGhvZD1tYW51YWwK"
         },
         "mode": 384
       },

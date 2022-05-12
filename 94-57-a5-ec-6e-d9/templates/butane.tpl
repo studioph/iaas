@@ -21,12 +21,12 @@ storage:
     - path: /opt/docker-compose/portainer.yml
       contents:
         source: https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml
-    - path: {{ .Values.network.file_prefix }}/eth1g.nmconnection
+    - path: {{ .Values.network.file_prefix }}/eno1.nmconnection
       mode: 0600
       contents:
         inline: |
 {{ tmpl.Exec "files/1g.network" . | indent 10 }}
-    - path: {{ .Values.network.file_prefix }}/eth10g.nmconnection
+    - path: {{ .Values.network.file_prefix }}/10g.nmconnection
       mode: 0600
       contents:
         inline: |

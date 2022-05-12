@@ -1,5 +1,5 @@
 [connection]
-id=eth10g
+id=10g
 type=ethernet
 autoconnect=true
 
@@ -7,4 +7,5 @@ autoconnect=true
 mac-address={{ .Values.network.g10.mac }}
 
 [ipv4]
-addresses={{ .Values.network.g10.ip }}
+address1={{ .Values.network.g10.ip }}
+method=manual
