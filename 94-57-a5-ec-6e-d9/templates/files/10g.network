@@ -1,5 +1,5 @@
 [connection]
-id=10g
+id=eth10g
 type=ethernet
 autoconnect=true
 

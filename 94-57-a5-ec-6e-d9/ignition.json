@@ -39,16 +39,17 @@
         }
       },
       {
-        "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
+        "path": "/etc/NetworkManager/system-connections/eth1g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTFnCnR5cGU9ZXRoZXJuZXQKYXV0b2Nvbm5lY3Q9dHJ1ZQoKW2V0aGVybmV0XQptYWMtYWRkcmVzcz05NDo1NzphNTplYzo2ZTpkOQoKW2lwdjRdCmRucz0xMC4wLjEuMQphZGRyZXNzZXM9MTAuMC4xLjEwLzI0CmdhdGV3YXk9MTAuMC4xLjEK"
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/0TKQQrDIBCF4f3cpVaLaYngScTFoI/URTXopCW3L4WU7B7v/0JqtSJJaTVSyR7yNAvJvuI30SuEeJN2MC99A1H4t0gvThfOuWMMP1s3PRxPDsnd4fJMFMr6tpFyHd5opZVRhg6O89LXm6WFBR/eT/cNAAD//8OD9secAAAA"
         },
         "mode": 384
       },
       {
-        "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
+        "path": "/etc/NetworkManager/system-connections/eth10g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPWV0aDEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
         },
         "mode": 384
       },
@@ -56,20 +57,6 @@
         "path": "/etc/hostname",
         "contents": {
           "source": "data:,coreos"
-        },
-        "mode": 420
-      },
-      {
-        "path": "/etc/profile.d/systemd-pager.sh",
-        "contents": {
-          "source": "data:,%23%20Tell%20systemd%20to%20not%20use%20a%20pager%20when%20printing%20information%0Aexport%20SYSTEMD_PAGER%3Dcat%0A"
-        },
-        "mode": 420
-      },
-      {
-        "path": "/etc/sysctl.d/20-silence-audit.conf",
-        "contents": {
-          "source": "data:,%23%20Raise%20console%20message%20logging%20level%20from%20DEBUG%20(7)%20to%20WARNING%20(4)%0A%23%20to%20hide%20audit%20messages%20from%20the%20interactive%20console%0Akernel.printk%3D4%0A"
         },
         "mode": 420
       }

@@ -21,12 +21,12 @@ storage:
     - path: /opt/docker-compose/portainer.yml
       contents:
         source: https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml
-    - path: {{ .Values.network.file_prefix }}/1g.nmconnection
+    - path: {{ .Values.network.file_prefix }}/eth1g.nmconnection
       mode: 0600
       contents:
         inline: |
 {{ tmpl.Exec "files/1g.network" . | indent 10 }}
-    - path: {{ .Values.network.file_prefix }}/10g.nmconnection
+    - path: {{ .Values.network.file_prefix }}/eth10g.nmconnection
       mode: 0600
       contents:
         inline: |
@@ -35,19 +35,6 @@ storage:
       mode: 0644
       contents:
         inline: coreos
-    - path: /etc/profile.d/systemd-pager.sh
-      mode: 0644
-      contents:
-        inline: |
-          # Tell systemd to not use a pager when printing information
-          export SYSTEMD_PAGER=cat
-    - path: /etc/sysctl.d/20-silence-audit.conf
-      mode: 0644
-      contents:
-        inline: |
-          # Raise console message logging level from DEBUG (7) to WARNING (4)
-          # to hide audit messages from the interactive console
-          kernel.printk=4
 systemd:
   units:
     - name: docker.service
