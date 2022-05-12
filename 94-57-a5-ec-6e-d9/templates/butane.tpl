@@ -31,7 +31,23 @@ storage:
       contents:
         inline: |
 {{ tmpl.Exec "files/10g.network" . | indent 10 }}
-
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: coreos
+    - path: /etc/profile.d/systemd-pager.sh
+      mode: 0644
+      contents:
+        inline: |
+          # Tell systemd to not use a pager when printing information
+          export SYSTEMD_PAGER=cat
+    - path: /etc/sysctl.d/20-silence-audit.conf
+      mode: 0644
+      contents:
+        inline: |
+          # Raise console message logging level from DEBUG (7) to WARNING (4)
+          # to hide audit messages from the interactive console
+          kernel.printk=4
 systemd:
   units:
     - name: docker.service
@@ -45,7 +61,7 @@ systemd:
           ExecStart=
           # Add new Execstart with `-` prefix to ignore failure`
           ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
-
+          TTYVTDisallocate=no
 passwd:
   users:
     - name: core
