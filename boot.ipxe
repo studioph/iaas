@@ -1,11 +1,9 @@
 #!ipxe
 
-set STREAM stable
-set VERSION 35.20220424.3.0
 set CONFIGURL https://paulhutchings.github.io/flatcar/${mac:hexhyp}/ignition.json
-set BASEURL https://builds.coreos.fedoraproject.org/prod/streams/${STREAM}/builds/${VERSION}/x86_64
+set BASEURL http://truenas.studiop:9000/assets
 
-kernel ${BASEURL}/fedora-coreos-${VERSION}-live-kernel-x86_64 initrd=main coreos.live.rootfs_url=${BASEURL}/fedora-coreos-${VERSION}-live-rootfs.x86_64.img coreos.inst.ignition_url=${CONFIGURL} || shell
-initrd --name main ${BASEURL}/fedora-coreos-${VERSION}-live-initramfs.x86_64.img || shell
+kernel ${BASEURL}/coreos-kernel initrd=main coreos.live.rootfs_url=${BASEURL}/coreos-rootfs coreos.inst.ignition_url=${CONFIGURL} || shell
+initrd --name main ${BASEURL}/coreos-initrd || shell
 
 boot || shell
