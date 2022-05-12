@@ -1,0 +1,10 @@
+[connection]
+id=10g
+type=ethernet
+autoconnect=true
+
+[ethernet]
+mac-address={{ .Values.network.g10.mac }}
+
+[ipv4]
+addresses={{ .Values.network.g10.ip }}

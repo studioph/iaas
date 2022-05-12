@@ -1,0 +1,12 @@
+[connection]
+id=1g
+type=ethernet
+autoconnect=true
+
+[ethernet]
+mac-address={{ .Values.network.g1.mac }}
+
+[ipv4]
+dns={{ .Values.global.network.dns }}
+addresses={{ .Values.network.g1.ip }}
+gateway={{ .Values.global.network.gateway }}
