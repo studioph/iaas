@@ -41,15 +41,14 @@
       {
         "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/0TKQQrDIBBG4f1/l6YzYikInkRciA6pi2rQSUtu301Ktu99IffWJGvtLaIWzyv02MSLvmQ0UaRd+2m8jl2A8H8R75RvqZQhc3oiJ+Rsdg92xjh+AqFuHxtR2vRMCy28ME4uV6K7sViTyjcdl/sFAAD//xeG2cCZAAAA"
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTFnCnR5cGU9ZXRoZXJuZXQKYXV0b2Nvbm5lY3Q9dHJ1ZQoKW2V0aGVybmV0XQptYWMtYWRkcmVzcz05NDo1NzphNTplYzo2ZTpkOQoKW2lwdjRdCmRucz0xMC4wLjEuMQphZGRyZXNzZXM9MTAuMC4xLjEwLzI0CmdhdGV3YXk9MTAuMC4xLjEK"
         },
         "mode": 384
       },
       {
         "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9OTQ6NTc6YTU6ZWM6NmU6ZDkKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9MDA6ZTA6NGM6NTE6MjI6MTcKCltpcHY0XQphZGRyZXNzZXM9MTAuMC4xMC4xMC8yNAo="
         },
         "mode": 384
       },

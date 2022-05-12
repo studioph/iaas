@@ -8,9 +8,9 @@ network:
   file_prefix: /etc/NetworkManager/system-connections
   g1:
     ip: 10.0.1.10/24
-    mac: 00:e0:4c:51:22:17
+    mac: 94:57:a5:ec:6e:d9
   g10:
     ip: 10.0.10.10/24
-    mac: 94:57:a5:ec:6e:d9
+    mac: 00:e0:4c:51:22:17
 butane:
   version: 1.4.0
