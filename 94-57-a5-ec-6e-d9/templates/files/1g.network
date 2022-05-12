@@ -1,8 +1,10 @@
 [connection]
-id=eno1
+id=1g
 type=ethernet
 autoconnect=true
-interface-name=eno1
+
+[ethernet]
+mac-address={{ .Values.network.g1.mac }}
 
 [ipv4]
 dns={{ .Values.global.network.dns }}

@@ -21,7 +21,7 @@ storage:
     - path: /opt/docker-compose/portainer.yml
       contents:
         source: https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml
-    - path: {{ .Values.network.file_prefix }}/eno1.nmconnection
+    - path: {{ .Values.network.file_prefix }}/1g.nmconnection
       mode: 0600
       contents:
         inline: |
@@ -54,3 +54,5 @@ passwd:
     - name: core
       ssh_authorized_keys:
         - {{ template "files/flatcar.pub" }}
+      groups:
+        - docker
