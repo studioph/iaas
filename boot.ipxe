@@ -3,7 +3,7 @@
 set CONFIGURL https://paulhutchings.github.io/flatcar/${mac:hexhyp}/ignition.json
 set BASEURL http://truenas.studiop:9000/assets
 
-kernel ${BASEURL}/coreos-kernel initrd=main coreos.live.rootfs_url=${BASEURL}/coreos-rootfs ignition.config.url=${CONFIGURL} ignition.firstboot console=ttyS0,115200n8 || shell
+kernel ${BASEURL}/coreos-kernel initrd=main coreos.live.rootfs_url=${BASEURL}/coreos-rootfs ignition.platform.id=metal ignition.config.url=${CONFIGURL} ignition.firstboot console=ttyS0,115200n8 || shell
 initrd --name main ${BASEURL}/coreos-initrd || shell
 
 boot || shell
