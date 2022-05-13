@@ -7,10 +7,8 @@ postExec:
   - --out-file
   - ignition.json
 context:
-  values:
-    url: values.yaml
-  global:
-    url: ../global.yaml
+  Values:
+    url: merge:values.yaml|../global.yaml
 
 templates:
   - systemd=templates/systemd/

@@ -1,9 +1,9 @@
 ---
 systemd:
   units:
-  {{- range .values.systemd.units }}
+  {{- range .Values.systemd.units }}
     - name: {{ .name }}
-      enabled: {{ index . "enabled" | default $.global.defaults.systemd.enabled }}
+      enabled: {{ index . "enabled" | default $.Values.global.defaults.systemd.enabled }}
     {{- if has . "contents"}}
       contents: |
 {{ tmpl.Exec .contents $ | indent 8 }}
@@ -19,16 +19,16 @@ systemd:
   {{- end }}
 storage:
   disks:
-  {{- range .values.storage.disks }}
+  {{- range .Values.storage.disks }}
     - device: /dev/disk/by-id/{{ .device }}
-      wipe_table: {{ index . "wipe" | default $.global.defaults.wipe.partition }}
+      wipe_table: {{ index . "wipe" | default $.Values.global.defaults.wipe.partition }}
       partitions:
       {{- range .partitions }}
         - label: {{ .label }}
       {{- end }}
   {{- end }}
   raid:
-  {{- range $key, $value := .values.storage.raid }}
+  {{- range $key, $value := .Values.storage.raid }}
     - name: {{ $key }}
       level: {{ $value.level }}
       devices:
@@ -37,20 +37,20 @@ storage:
         {{- end }}
   {{- end }}
   filesystems:
-    {{- range $key, $value := .values.storage.filesystems }}
+    {{- range $key, $value := .Values.storage.filesystems }}
     - name: {{ $key }}
       mount:
         device: {{ $value.device }}
-        format: {{ index $value "format" | default $.global.defaults.storage.format }}
-        wipe_filesystem: {{ index . "wipe" | default $.global.defaults.wipe.filesystem }}
+        format: {{ index $value "format" | default $.Values.global.defaults.storage.format }}
+        wipe_filesystem: {{ index . "wipe" | default $.Values.global.defaults.wipe.filesystem }}
         {{- if has . "label" }}
         label: {{ $value.label }}
         {{- end }}
     {{- end }}
   directories:
-  {{- range .values.storage.folders }}
+  {{- range .Values.storage.folders }}
     - path: {{ .path }}
-      filesystem: {{ index . "filesystem" | default $.global.defaults.storage.filesystem }}
+      filesystem: {{ index . "filesystem" | default $.Values.global.defaults.storage.filesystem }}
   {{- end }}
   files:
     - path: /etc/ssh/sshd_config
@@ -59,9 +59,9 @@ storage:
       contents:
         inline: |
 {{ tmpl.Exec "files/sshd_config" . | indent 10 }}
-  {{- range .values.storage.files.remote }}
+  {{- range .Values.storage.files.remote }}
     - path: {{ .path }}
-      filesystem: {{ index . "filesystem" | default $.global.defaults.storage.filesystem }}
+      filesystem: {{ index . "filesystem" | default $.Values.global.defaults.storage.filesystem }}
       {{- if has . "mode" }}
       mode: {{ printf "%04o" .mode }}
       {{- end }} 
@@ -73,12 +73,12 @@ storage:
       filesystem: root
       mode: 0644
       contents:
-        inline: {{ .values.hostname }}
+        inline: {{ .Values.hostname }}
   links:
-  {{- range .values.storage.links }}
+  {{- range .Values.storage.links }}
     - path: {{ .path }}
       target: {{.target }}
-      filesystem: {{ index . "filesystem" | default $.global.defaults.storage.filesystem }}
+      filesystem: {{ index . "filesystem" | default $.Values.global.defaults.storage.filesystem }}
   {{- end }}
 passwd:
   users:
@@ -87,7 +87,7 @@ passwd:
         - {{ template "files/flatcar.pub" }}
 networkd:
   units:
-  {{- range .values.networkd.units }}
+  {{- range .Values.networkd.units }}
     - name: {{ .name }}
       contents: |
 {{ tmpl.Exec .contents $ | indent 8 }}

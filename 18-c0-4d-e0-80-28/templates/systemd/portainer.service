@@ -5,10 +5,10 @@ Requires=docker.service
 
 [Service]
 Environment="COMPOSE_PROJECT_NAME=portainer"
-Environment="COMPOSE_FILE={{ .values.docker.compose.stacks.portainer }}"
-ExecStart={{ .values.docker.compose.path }} up --detach
-User={{ .values.docker.user }}
-Group={{ .values.docker.user }}
+Environment="COMPOSE_FILE={{ .Values.docker.compose.stacks.portainer }}"
+ExecStart={{ .Values.docker.compose.path }} up --detach
+User={{ .Values.docker.user }}
+Group={{ .Values.docker.user }}
 
 [Install]
 WantedBy=multi-user.target

@@ -5,7 +5,7 @@ Requires=nss-lookup.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/nslookup {{ .values.hostname }}.studiop
+ExecStart=/usr/bin/nslookup {{ .Values.hostname }}.studiop
 
 [Install]
 RequiredBy=docker.service

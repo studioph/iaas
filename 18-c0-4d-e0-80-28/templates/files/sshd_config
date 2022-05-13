@@ -3,5 +3,5 @@ Subsystem sftp internal-sftp
 UseDNS no
 
 PermitRootLogin no
-AllowUsers {{ .values.docker.user }}
+AllowUsers {{ .Values.docker.user }}
 AuthenticationMethods publickey

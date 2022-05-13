@@ -1,5 +1,5 @@
 [Match]
-MACAddress={{ .values.network.g1.mac }}
+MACAddress={{ .Values.network.g1.mac }}
 
 [Link]
 NamePolicy=kernel database onboard slot path

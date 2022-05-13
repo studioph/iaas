@@ -1,13 +1,14 @@
-network:
-  dns: 10.0.1.1
-  gateway: 10.0.1.1
+global:
+  network:
+    dns: 10.0.1.1
+    gateway: 10.0.1.1
 
-defaults:
-  storage:
-    filesystem: root
-    format: ext4
-  systemd:
-    enabled: true
-  wipe:
-    partition: true
-    filesystem: false
+  defaults:
+    storage:
+      filesystem: root
+      format: ext4
+    systemd:
+      enabled: true
+    wipe:
+      partition: true
+      filesystem: false
