@@ -6,7 +6,9 @@
     "users": [
       {
         "groups": [
-          "docker"
+          "docker",
+          "render",
+          "video"
         ],
         "name": "core",
         "sshAuthorizedKeys": [

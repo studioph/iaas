@@ -1,9 +1,9 @@
 #!ipxe
 
-set CONFIGURL https://paulhutchings.github.io/flatcar/${mac:hexhyp}/ignition.json
-set BASEURL http://truenas.studiop:9000/assets
+set IGNITION_URL http://boot.studiop:8080/${mac:hexhyp}/ignition.json
+set BASE_URL http://truenas.studiop:9000/assets
 
-kernel ${BASEURL}/coreos-kernel initrd=main coreos.live.rootfs_url=${BASEURL}/coreos-rootfs ignition.platform.id=metal ignition.config.url=${CONFIGURL} ignition.firstboot console=ttyS0,115200n8 || shell
-initrd --name main ${BASEURL}/coreos-initrd || shell
+kernel ${BASE_URL}/coreos-kernel initrd=main coreos.live.rootfs_url=${BASE_URL}/coreos-rootfs ignition.platform.id=metal ignition.config.url=${IGNITION_URL} ignition.firstboot console=ttyS0,115200n8 || shell
+initrd --name main ${BASE_URL}/coreos-initrd || shell
 
 boot || shell

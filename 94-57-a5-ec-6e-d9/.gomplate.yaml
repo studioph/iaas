@@ -12,5 +12,4 @@ context:
     url: merge:values.yaml|../global.yaml
 
 templates:
-  - systemd=templates/systemd/
   - files=templates/files/
