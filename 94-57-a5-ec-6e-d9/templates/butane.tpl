@@ -62,3 +62,5 @@ passwd:
         - {{ template "files/flatcar.pub" }}
       groups:
         - docker
+        - render
+        - video
