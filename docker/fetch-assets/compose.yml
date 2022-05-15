@@ -1,0 +1,18 @@
+services:
+  fetch:
+    image: ghcr.io/paulhutchings/fetch-coreos-assets:20220515
+    container_name: fetch-assets
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+volumes:
+  data:
+    name: coreos-assets
