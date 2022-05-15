@@ -1,0 +1,7 @@
+# stream: stable
+architecture: aarch64
+platform: metal
+ignition-file: ignition.json
+append-karg:
+  - console=ttyAMA0,115200n8
+image-file: /images/fedora-coreos-35.20220424.3.0-metal.aarch64.raw.xz
