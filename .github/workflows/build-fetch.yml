@@ -6,6 +6,7 @@ on:
     paths:
       - docker/fetch-assets/Dockerfile
       - docker/fetch-assets/entrypoint.sh
+      - .github/workflows/build-fetch.yml
   workflow_dispatch:
 
 jobs:
