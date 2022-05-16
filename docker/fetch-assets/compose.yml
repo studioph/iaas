@@ -1,6 +1,6 @@
 services:
   fetch:
-    image: ghcr.io/paulhutchings/fetch-coreos-assets:20220515
+    image: ghcr.io/paulhutchings/fetch-coreos-assets:20220516
     container_name: fetch-assets
     volumes:
       - data:/data

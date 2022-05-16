@@ -1,6 +1,6 @@
 services:
   boot:
-    image: ghcr.io/paulhutchings/iaas:20220515
+    image: ghcr.io/paulhutchings/iaas:20220516
     container_name: nginx
     ports:
       - 8080:80
