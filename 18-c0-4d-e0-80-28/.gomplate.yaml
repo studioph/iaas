@@ -1,15 +1,16 @@
 inputFiles:
-  - templates/config.tpl
+  - templates/butane.tpl
 execPipe: true
 postExec:
-  - ct
+  - butane
   - --pretty
-  - --out-file
+  - --output
   - ignition.json
+
 context:
   Values:
     url: merge:values.yaml|../global.yaml
 
 templates:
-  - systemd=templates/systemd/
   - files=templates/files/
+  - global=../templates/

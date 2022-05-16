@@ -1,5 +1,5 @@
+hostname: &hostname flatcar
 docker:
-  user: core
   compose:
     path: &compose-path /opt/bin/docker-compose
     stacks:
@@ -8,17 +8,9 @@ docker:
 systemd:
   units:
     - name: docker.service
-      dropins:
-        - name: 00-wait-dns.conf
-          contents: systemd/docker-wait-dns.conf
-    - name: var-lib-docker.mount
-      contents: systemd/docker.mount
+    - name: serial-getty@ttyS0.service
     - name: portainer.service
-      contents: systemd/portainer.service
-    - name: usr-lib64-modules.mount
-    - name: forklift@nvidia.service
-    - name: nslookup.service
-      contents: systemd/nslookup.service
+      contents: global/portainer.service
 
 storage:
   label: &docker-label docker
@@ -30,47 +22,38 @@ storage:
       partitions:
         - label: *docker-label
   raid:
-    docker:
+    - name: *docker-label
       level: mirror
       disks:
         - *docker1
         - *docker2
   filesystems:
-    docker:
-      label: *docker-label
+    - path: /var/lib/docker
       device: /dev/md/docker
+      label: *docker-label
   files:
     remote:
       - path: *portainer-file
-        mode: 0664
         url: https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml
       - path: *compose-path
         mode: 0755
-        url: https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64
-      - path: /opt/flatcar-forklift/forklift.sh
-        mode: 0755
-        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh
-      - path: /etc/systemd/system/forklift@.service
-        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift%40.service
-      - path: /etc/systemd/system/usr-lib64-modules.mount
-        url: https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount
-  links:
-    - path: /etc/coreos/update.conf
-      target: /usr/share/coreos/update.conf
-    - path: /etc/systemd/system/multi-user.target.wants/forklift@nvidia.service
-      target: /etc/systemd/system/forklift@.service
-  folders:
-    - path: /opt/overlay/modules
-    - path: /opt/overlay/modules.wd
-
-networkd:
-  units:
-    - name: 00-1g-static.network
-      contents: systemd/1g.network
-    - name: 00-10g-static.network
-      contents: systemd/10g.network
-    - name: 00-1g-patch.link
-      contents: systemd/1g-patch.link
+        url: https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64
+    template:
+      - path: /etc/selinux/config
+        mode: 0600
+        overwrite: true
+        contents: global/selinux.config
+      - path: /etc/NetworkManager/system-connections/1g.nmconnection
+        mode: 0600
+        contents: global/static.nmconnection
+      - path: /etc/NetworkManager/system-connections/10g.nmconnection
+        mode: 0600
+        contents: files/10g.nmconnection
+    inline:
+      - path: /etc/sysctl.d/20-silence-audit.conf
+        contents: kernel.printk=4
+      - path: /etc/hostname
+        contents: *hostname
 
 network:
   g1:
@@ -79,5 +62,3 @@ network:
   g10:
     ip: 10.0.10.3/24
     mac: e4:1d:2d:7e:f4:c0
-
-hostname: flatcar

@@ -1,7 +1,0 @@
-UsePrivilegeSeparation sandbox
-Subsystem sftp internal-sftp
-UseDNS no
-
-PermitRootLogin no
-AllowUsers {{ .Values.docker.user }}
-AuthenticationMethods publickey

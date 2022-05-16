@@ -1,7 +1,0 @@
-[Match]
-MACAddress={{ .Values.network.g1.mac }}
-
-[Link]
-NamePolicy=kernel database onboard slot path
-MACAddressPolicy=persistent
-WakeOnLan=magic
