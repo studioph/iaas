@@ -1,6 +1,8 @@
 name: Build Fetch Assets Image
 on:
   push:
+    branches-ignore:
+      - main
     paths:
       - docker/fetch-assets/Dockerfile
       - docker/fetch-assets/entrypoint.sh
