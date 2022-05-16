@@ -11,7 +11,7 @@ server {
     }
 
     location /assets {
-        try_files $uri @proxy_assets
+        try_files $uri @proxy_assets;
     }
 
     location @proxy_assets {
