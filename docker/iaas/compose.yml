@@ -1,12 +1,12 @@
 services:
-  boot:
+  iaas:
     image: ghcr.io/paulhutchings/iaas:20220516
     container_name: iaas-server
     ports:
       - 8080:80
     environment:
       NGINX_HOST: iaas.studiop
-      UPSTREAM_HOST: ${UPSTREAM_HOST:-paulhutchings.github.io/iaas
+      UPSTREAM_HOST: ${UPSTREAM_HOST:-paulhutchings.github.io/iaas}
       UPSTREAM_PROTO: ${UPSTREAM_PROTO:-https}
       ASSETS_HOST: ${ASSETS_HOST:-truenas.studiop:9000}
       ASSETS_PROTO: ${ASSETS_PROTO:-http}
