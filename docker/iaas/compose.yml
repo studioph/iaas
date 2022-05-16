@@ -1,0 +1,28 @@
+services:
+  boot:
+    image: ghcr.io/paulhutchings/iaas:20220515
+    container_name: nginx
+    ports:
+      - 8080:80
+    environment:
+      NGINX_HOST: iaas.studiop
+      UPSTREAM_HOST: ${UPSTREAM_HOST:-paulhutchings.github.io/iaas
+      UPSTREAM_PROTO: ${UPSTREAM_PROTO:-https}
+      ASSETS_HOST: ${ASSETS_HOST:-truenas.studiop:9000}
+      ASSETS_PROTO: ${ASSETS_PROTO:-http}
+    volumes:
+      - config:/etc/nginx/html
+      - assets:/etc/nginx/html/assets:ro
+    restart: unless-stopped
+    networks:
+      - iaas
+
+volumes:
+  assets:
+    name: coreos-assets
+  config:
+    name: iaas-config
+
+networks:
+  iaas:
+    name: iaas

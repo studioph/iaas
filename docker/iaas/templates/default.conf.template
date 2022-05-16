@@ -1,0 +1,20 @@
+server {
+    server_name ${NGINX_HOST};
+    resolver 127.0.0.11;
+
+    location / {
+        try_files $uri @proxy;
+    }
+
+    location @proxy {
+        proxy_pass ${UPSTREAM_PROTO}://${UPSTREAM_HOST}/$request_uri?;
+    }
+
+    location /assets {
+        try_files $uri @proxy_assets
+    }
+
+    location @proxy_assets {
+        proxy_pass ${ASSETS_PROTO}://${ASSETS_HOST}/$request_uri?;
+    }
+}
