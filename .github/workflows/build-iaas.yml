@@ -1,6 +1,8 @@
 name: Build IaaS Image
 on:
   push:
+    branches-ignore:
+      - main
     paths:
       - docker/iaas/Dockerfile
       - docker/iaas/templates/*
