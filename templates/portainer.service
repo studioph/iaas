@@ -7,8 +7,8 @@ Requires=docker.service
 Environment="COMPOSE_PROJECT_NAME=portainer"
 Environment="COMPOSE_FILE={{ .Values.docker.compose.stacks.portainer }}"
 ExecStart={{ .Values.docker.compose.path }} up --detach
-User={{ .Values.docker.user }}
-Group={{ .Values.docker.user }}
+User={{ .Values.global.docker.user }}
+Group={{ .Values.global.docker.user }}
 
 [Install]
 WantedBy=multi-user.target

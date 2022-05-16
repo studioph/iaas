@@ -1,8 +1,3 @@
 #!ipxe
 
-set BASE_URL https://stable.release.flatcar-linux.net/amd64-usr/current
-set IGNITION_URL https://paulhutchings.github.io/flatcar/${mac:hexhyp}/ignition.json
-
-kernel ${BASE_URL}/flatcar_production_pxe.vmlinuz initrd=flatcar_production_pxe_image.cpio.gz flatcar.config.url=${IGNITION_URL} flatcar.first_boot=yes console=tty0 console=ttyS0,115200n8 ipv6.disable=1
-initrd ${BASE_URL}/flatcar_production_pxe_image.cpio.gz
-boot
+chain ${mac:hexhyp}/boot.ipxe

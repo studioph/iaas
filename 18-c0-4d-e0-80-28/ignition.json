@@ -1,27 +1,6 @@
 {
   "ignition": {
-    "config": {},
-    "security": {
-      "tls": {}
-    },
-    "timeouts": {},
-    "version": "2.3.0"
-  },
-  "networkd": {
-    "units": [
-      {
-        "contents": "[Match]\nMACAddress=18:c0:4d:e0:80:28\n\n[Network]\nDNS=10.0.1.1\nAddress=10.0.1.3/24\nGateway=10.0.1.1\n",
-        "name": "00-1g-static.network"
-      },
-      {
-        "contents": "[Match]\nMACAddress=e4:1d:2d:7e:f4:c0\n\n[Network]\nAddress=10.0.10.3/24\n",
-        "name": "00-10g-static.network"
-      },
-      {
-        "contents": "[Match]\nMACAddress=18:c0:4d:e0:80:28\n\n[Link]\nNamePolicy=kernel database onboard slot path\nMACAddressPolicy=persistent\nWakeOnLan=magic",
-        "name": "00-1g-patch.link"
-      }
-    ]
+    "version": "3.3.0"
   },
   "passwd": {
     "users": [
@@ -34,18 +13,6 @@
     ]
   },
   "storage": {
-    "directories": [
-      {
-        "filesystem": "root",
-        "path": "/opt/overlay/modules",
-        "mode": 493
-      },
-      {
-        "filesystem": "root",
-        "path": "/opt/overlay/modules.wd",
-        "mode": 493
-      }
-    ],
     "disks": [
       {
         "device": "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG538814W",
@@ -68,89 +35,62 @@
     ],
     "files": [
       {
-        "filesystem": "root",
-        "path": "/etc/ssh/sshd_config",
+        "path": "/etc/sysctl.d/20-silence-audit.conf",
         "contents": {
-          "source": "data:,UsePrivilegeSeparation%20sandbox%0ASubsystem%20sftp%20internal-sftp%0AUseDNS%20no%0A%0APermitRootLogin%20no%0AAllowUsers%20core%0AAuthenticationMethods%20publickey%0A",
-          "verification": {}
+          "source": "data:,kernel.printk%3D4"
+        }
+      },
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,flatcar"
+        }
+      },
+      {
+        "path": "/opt/docker-compose/portainer.yml",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml"
+        }
+      },
+      {
+        "path": "/opt/bin/docker-compose",
+        "contents": {
+          "source": "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64"
+        },
+        "mode": 493
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/selinux/config",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/3SQz2pyMRTE9z7FgNtPH+CDLl0UrBS00C7TZPQeGnMuOedqfftyteYWSrPKnzPzm8kcu04Me8lE1OJVs8E7wjw4oXtsV2spwye03O4v5jwuZ/Px4XHz8vqAGAo8fBBargrvaIR3lcQp5IH2fzbHbbHstUYpByyaszEOVfyCXrPEC8S+x5iWTdizHsVMTvyh7KsUN5xDLVIOBinmDGkM0UCTRRIL75kJC2x08mjQrCGNyHuxCTm13b09r/5sfNZffT3UA/3K3N23fdVIMxpC5XhyRmf610THbFjgacguWPPEjG37otu0aGk5r5HunNlXAAAA//9vql2W0QEAAA=="
         },
         "mode": 384
       },
       {
-        "filesystem": "root",
-        "path": "/opt/docker-compose/portainer.yml",
+        "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
         "contents": {
-          "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml",
-          "verification": {}
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/0TKQQqDMBBG4f1/l9rEupDAnERcDJlBhToRnbR4+26Ubt/7hlzMNPtSbMQiFCf4uSmpz7qbOrh6uQz5XhUY7jdi5fxgkV2Pg2KfckidJA2pD6ntgWHZPt0IsYNiaEITm4iLx7u8nm2HiV2/fP7Vqj4XoZWt8hu/AAAA//97u/xZpQAAAA=="
         },
-        "mode": 436
+        "mode": 384
       },
       {
-        "filesystem": "root",
-        "path": "/opt/bin/docker-compose",
+        "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
         "contents": {
-          "source": "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64",
-          "verification": {}
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9ZTQ6MWQ6MmQ6N2U6ZjQ6YzAKCltpcHY0XQphZGRyZXNzMT0xMC4wLjEwLjMvMjQKbWV0aG9kPW1hbnVhbAo="
         },
-        "mode": 493
-      },
-      {
-        "filesystem": "root",
-        "path": "/opt/flatcar-forklift/forklift.sh",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift.sh",
-          "verification": {}
-        },
-        "mode": 493
-      },
-      {
-        "filesystem": "root",
-        "path": "/etc/systemd/system/forklift@.service",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/forklift%40.service",
-          "verification": {}
-        },
-        "mode": 420
-      },
-      {
-        "filesystem": "root",
-        "path": "/etc/systemd/system/usr-lib64-modules.mount",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/mediadepot/flatcar-forklift/master/usr-lib64-modules.mount",
-          "verification": {}
-        },
-        "mode": 420
-      },
-      {
-        "filesystem": "root",
-        "path": "/etc/hostname",
-        "contents": {
-          "source": "data:,flatcar",
-          "verification": {}
-        },
-        "mode": 420
+        "mode": 384
       }
     ],
     "filesystems": [
       {
-        "mount": {
-          "device": "/dev/md/docker",
-          "format": "ext4",
-          "label": "docker"
-        },
-        "name": "docker"
-      }
-    ],
-    "links": [
-      {
-        "filesystem": "root",
-        "path": "/etc/coreos/update.conf",
-        "target": "/usr/share/coreos/update.conf"
-      },
-      {
-        "filesystem": "root",
-        "path": "/etc/systemd/system/multi-user.target.wants/forklift@nvidia.service",
-        "target": "/etc/systemd/system/forklift@.service"
+        "device": "/dev/md/docker",
+        "format": "ext4",
+        "label": "docker",
+        "path": "/var/lib/docker",
+        "wipeFilesystem": false
       }
     ],
     "raid": [
@@ -167,37 +107,22 @@
   "systemd": {
     "units": [
       {
-        "dropins": [
-          {
-            "contents": "[Unit]\nAfter=nslookup.service\n",
-            "name": "00-wait-dns.conf"
-          }
-        ],
+        "contents": "# Generated by Butane\n[Unit]\nBefore=local-fs.target\nRequires=systemd-fsck@dev-md-docker.service\nAfter=systemd-fsck@dev-md-docker.service\n\n[Mount]\nWhere=/var/lib/docker\nWhat=/dev/md/docker\nType=ext4\n\n[Install]\nRequiredBy=local-fs.target",
+        "enabled": true,
+        "name": "var-lib-docker.mount"
+      },
+      {
         "enabled": true,
         "name": "docker.service"
       },
       {
-        "contents": "[Unit]\nBefore=local-fs.target\n\n[Mount]\nWhat=/dev/md/docker\nWhere=/var/lib/docker\nType=ext4\n\n[Install]\nWantedBy=local-fs.target\n",
         "enabled": true,
-        "name": "var-lib-docker.mount"
+        "name": "serial-getty@ttyS0.service"
       },
       {
         "contents": "[Unit]\nDescription=Initialize Portainer\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
-      },
-      {
-        "enabled": true,
-        "name": "usr-lib64-modules.mount"
-      },
-      {
-        "enabled": true,
-        "name": "forklift@nvidia.service"
-      },
-      {
-        "contents": "[Unit]\nDescription=Wait for DNS resolution\nAfter=nss-lookup.target\nRequires=nss-lookup.target\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/nslookup flatcar.studiop\n\n[Install]\nRequiredBy=docker.service\n",
-        "enabled": true,
-        "name": "nslookup.service"
       }
     ]
   }
