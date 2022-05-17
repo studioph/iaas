@@ -1,0 +1,58 @@
+name: Update CoreOS version
+on:
+  schedule:
+      # 12:30 AM on Sun
+    - cron: '30 0 * * SUN'
+  workflow_dispatch:
+
+env:
+  STREAM: stable
+  ARCH: x86_64
+
+jobs:
+  fetch-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      latest-coreos-version: ${{ steps.fetch-latest.outputs.value }}
+      current-coreos-version: ${{ steps.fetch-current.outputs.content }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Fetch latest CoreOS version from ${{ env.STREAM }} stream
+        id: fetch-latest
+        uses: senmu/download-json-property-action@v1.1.0
+        with:
+          url: https://builds.coreos.fedoraproject.org/streams/${{ env.STREAM }}.json
+          property_path: architectures.${{ env.ARCH }}.artifacts.metal.release
+      
+      - name: Print latest CoreOS version
+        run: echo ${{ steps.fetch-latest.outputs.value }}
+
+      - name: Fetch currently used CoreOS version
+        id: fetch-current
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: coreos/version
+
+      - name: Print current CoreOS version
+        run: echo ${{ steps.fetch-current.outputs.content }}
+
+  update-version:
+    needs: fetch-versions
+    if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Update CoreOS version in Git
+        run: printf "%s" ${{ needs.fetch-versions.outputs.latest-coreos-version }} > coreos/version
+
+      - name: Update CoreOS version in iPXE boot script
+        run: sed -i -E 's/VERSION [0-9\.]+/VERSION ${{ needs.fetch-versions.outputs.latest-coreos-version }}/' coreos/boot.ipxe
+
+      - name: Commit updated version
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update CoreOS version
