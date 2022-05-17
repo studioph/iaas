@@ -4,8 +4,6 @@ on:
       # 12:30 AM on Sun
     - cron: '30 0 * * SUN'
   workflow_dispatch:
-  push:
-
 
 env:
   STREAM: stable
@@ -42,7 +40,7 @@ jobs:
 
   update-version:
     needs: fetch-versions
-    # if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
+    if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
