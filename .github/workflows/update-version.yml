@@ -27,6 +27,9 @@ jobs:
         with:
           url: https://builds.coreos.fedoraproject.org/streams/${{ env.STREAM }}.json
           property_path: architectures.${{ env.ARCH }}.artifacts.metal.release
+      
+      - name: Print latest CoreOS version
+        run: echo ${{ steps.fetch-latest.outputs.value }}
 
       - name: Fetch currently used CoreOS version
         id: fetch-current
@@ -34,9 +37,12 @@ jobs:
         with:
           path: coreos/version
 
+      - name: Print current CoreOS version
+        run: echo ${{ steps.fetch-current.outputs.content }}
+
   update-version:
     needs: fetch-versions
-    if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
+    # if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -44,3 +50,11 @@ jobs:
 
       - name: Update CoreOS version in Git
         run: printf "%s" ${{ needs.fetch-versions.outputs.latest-coreos-version }} > coreos/version
+
+      - name: Update CoreOS version in iPXE boot script
+        run: sed -i -E 's/VERSION [0-9\.]+/VERSION ${{ needs.fetch-versions.outputs.latest-coreos-version }}/' coreos/boot.ipxe
+
+      - name: Commit updated version
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update CoreOS version
