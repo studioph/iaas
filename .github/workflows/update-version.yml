@@ -35,7 +35,7 @@ jobs:
           path: coreos/version
 
   update-version:
-    needs: fetch-stream
+    needs: fetch-versions
     if: needs.fetch-versions.outputs.latest-coreos-version > needs.fetch-versions.outputs.current-coreos-version
     runs-on: ubuntu-latest
     steps:
