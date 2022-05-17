@@ -23,7 +23,7 @@ jobs:
 
       - name: Fetch latest CoreOS version from ${{ env.STREAM }} stream
         id: fetch-latest
-        uses: senmu/download-json-property-action@v1
+        uses: senmu/download-json-property-action@v1.1.0
         with:
           url: https://builds.coreos.fedoraproject.org/streams/${{ env.STREAM }}.json
           property_path: architectures.${{ env.ARCH }}.artifacts.metal.release
