@@ -9,6 +9,14 @@ services:
     restart: unless-stopped
     networks:
       - iaas
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+        reservations:
+          cpus: '0.5'
+          memory: 128M
 
 networks:
   iaas:
