@@ -5,9 +5,9 @@ set VERSION 35.20220424.3.0
 set IGNITION_URL https://paulhutchings.github.io/iaas/${mac:hexhyp}/ignition.json
 set BASE_URL https://builds.coreos.fedoraproject.org/prod/streams/${STREAM}/builds/${VERSION}/x86_64
 
-set KERNEL_URL ${BASEURL}/fedora-coreos-${VERSION}-live-kernel-x86_64
-set INITRD_URL ${BASEURL}/fedora-coreos-${VERSION}-live-initramfs.x86_64.img
-set ROOTFS_URL ${BASEURL}/fedora-coreos-${VERSION}-live-rootfs.x86_64.img
+set KERNEL_URL ${BASE_URL}/fedora-coreos-${VERSION}-live-kernel-x86_64
+set INITRD_URL ${BASE_URL}/fedora-coreos-${VERSION}-live-initramfs.x86_64.img
+set ROOTFS_URL ${BASE_URL}/fedora-coreos-${VERSION}-live-rootfs.x86_64.img
 
 kernel ${KERNEL_URL} initrd=main coreos.live.rootfs_url=${ROOTFS_URL} ignition.platform.id=metal ignition.firstboot ignition.config.url=${IGNITION_URL} console=ttyS0,115200n8 || shell
 initrd --name main ${INITRD_URL} || shell
