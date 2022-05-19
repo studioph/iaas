@@ -1,4 +1,4 @@
-hostname: &hostname flatcar
+hostname: &hostname coreos
 docker:
   compose:
     path: &compose-path /opt/bin/docker-compose

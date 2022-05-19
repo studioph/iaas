@@ -75,3 +75,5 @@ passwd:
     - name: {{ .Values.global.docker.user }}
       ssh_authorized_keys:
         - {{ template "files/coreos.pub" }}
+      groups:
+        - docker

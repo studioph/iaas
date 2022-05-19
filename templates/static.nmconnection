@@ -2,6 +2,7 @@
 id=1g
 type=ethernet
 autoconnect=true
+dns-over-tls=0
 
 [ethernet]
 mac-address={{ .Values.network.g1.mac }}

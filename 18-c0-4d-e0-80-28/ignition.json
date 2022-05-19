@@ -5,6 +5,9 @@
   "passwd": {
     "users": [
       {
+        "groups": [
+          "docker"
+        ],
         "name": "core",
         "sshAuthorizedKeys": [
           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCn5exRlpq7WUhbhBwkNbsUBO/7HdpcP3HadkL9/V3ug7fY90QoIIk935JDH5mBfgLblIEUDzSFSUvUVnKe+epETQysPiVSF06+9iz63/uKlr7mrvlmC3Pmh726MLNLpDVqrJ2g4tjmC2iJpyc5sAKoQsJPv/7Pi2DlVOVAs1H7ci3uclnyT2ou13Sj5rImLqcgT22DFqDraEDWlwuMIYr1epxpjbUmx9hjB/SNWXFm/O75naV8LfderZ2WyI1j75rqkDBEXcHYd/SCPM58u9FlHeXJNkxr9rWRGpinqLEuj0hSFdvilKFZtawHSZ4ha4UGWFbywaxoDTsErLg8VGyG7w8m541YjbCKE+/7znbfsv8AqrYj3Hx5oV8SQwKTu75XxvHzmY37QVvPInZiSk1QeKpTUEqVc9duH9zDyNvje/qMtpsSYee/gTGFt+p2SX2kNW4t7PRLG93E9Kcbn/0IjFZ6snXbrOGcuV8ohervtD2Cmzubgi0wlfiltgDQnvs= paul@studiop-dev"
@@ -43,7 +46,7 @@
       {
         "path": "/etc/hostname",
         "contents": {
-          "source": "data:,flatcar"
+          "source": "data:,coreos"
         }
       },
       {
@@ -72,14 +75,14 @@
         "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/0TKQQqDMBBG4f1/l9rEupDAnERcDJlBhToRnbR4+26Ubt/7hlzMNPtSbMQiFCf4uSmpz7qbOrh6uQz5XhUY7jdi5fxgkV2Pg2KfckidJA2pD6ntgWHZPt0IsYNiaEITm4iLx7u8nm2HiV2/fP7Vqj4XoZWt8hu/AAAA//97u/xZpQAAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/0TMQQqDMBBG4f1/F21iXUhgTiIuhmRQQRNJJhZvXwpKt4+PN/oUo3hdU5ywBrIz9DqERBfJURRcNd2GNFdBiKVJp+RGt0IGGB86YWffcAhZSiE7OG9cH5wYNxjXDcC4Hmc//QZkTWta21rc3D7l/ep6zKzy4euvdtElBdo5Vt7wDQAA//+ti7JHtAAAAA=="
         },
         "mode": 384
       },
       {
         "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9ZTQ6MWQ6MmQ6N2U6ZjQ6YzAKCltpcHY0XQphZGRyZXNzMT0xMC4wLjEwLjMvMjQKbWV0aG9kPW1hbnVhbAo="
+          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9ZTQ6MWQ6MmQ6N2U6ZjQ6YzAKCltpcHY0XQphZGRyZXNzMT0xMC4wLjEwLjMvMjQKbWV0aG9kPW1hbnVhbApkaGNwLXRpbWVvdXQ9MQo="
         },
         "mode": 384
       }
