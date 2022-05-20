@@ -2,7 +2,7 @@
 
 set STREAM stable
 set VERSION 35.20220424.3.0
-set IGNITION_URL https://paulhutchings.github.io/iaas/${mac:hexhyp}/ignition.json
+set IGNITION_URL https://studioph.github.io/iaas/${mac:hexhyp}/ignition.json
 set BASE_URL https://builds.coreos.fedoraproject.org/prod/streams/${STREAM}/builds/${VERSION}/x86_64
 
 set KERNEL_URL ${BASE_URL}/fedora-coreos-${VERSION}-live-kernel-x86_64

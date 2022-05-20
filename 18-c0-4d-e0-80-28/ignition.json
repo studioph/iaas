@@ -52,7 +52,7 @@
       {
         "path": "/opt/docker-compose/portainer.yml",
         "contents": {
-          "source": "https://raw.githubusercontent.com/paulhutchings/compose/master/portainer.yml"
+          "source": "https://raw.githubusercontent.com/studioph/compose/master/portainer.yml"
         }
       },
       {
