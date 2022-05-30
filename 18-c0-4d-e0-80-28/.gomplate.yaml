@@ -9,8 +9,8 @@ postExec:
 
 context:
   Values:
-    url: merge:values.yaml|../global.yaml
+    url: merge:values.yaml|../global/values.yaml
 
 templates:
   - files=templates/files/
-  - global=../templates/
+  - global=../global/templates/

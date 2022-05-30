@@ -8,6 +8,8 @@ global:
     version: 1.4.0
   selinux:
     state: permissive
+  update:
+    frequency: weekly
 
   defaults:
     storage:
