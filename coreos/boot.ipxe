@@ -1,7 +1,7 @@
 #!ipxe
 
 set STREAM stable
-set VERSION 36.20220505.3.2
+set VERSION 36.20220522.3.0
 set IGNITION_URL https://studioph.github.io/iaas/${mac:hexhyp}/ignition.json
 set BASE_URL https://builds.coreos.fedoraproject.org/prod/streams/${STREAM}/builds/${VERSION}/x86_64
 
