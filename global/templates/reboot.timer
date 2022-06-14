@@ -2,7 +2,7 @@
 Description=Reboot {{ .Values.global.update.frequency }}
 
 [Timer]
-OnCalendar={{ .Values.global.update.frequency }}
+OnCalendar={{ .Values.global.update.frequency }} {{ .Values.global.update.timezone }}
 RandomizedDelaySec=1h
 Unit=reboot.service
 
