@@ -136,6 +136,10 @@
         "contents": "[Unit]\nDescription=Reboot server\n\n[Service]\nType=oneshot\nExecStart=/usr/sbin/reboot\n",
         "enabled": false,
         "name": "reboot.service"
+      },
+      {
+        "enabled": false,
+        "name": "rpm-ostree-countme.service"
       }
     ]
   }
