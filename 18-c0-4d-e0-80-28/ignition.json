@@ -140,6 +140,10 @@
       {
         "enabled": false,
         "name": "rpm-ostree-countme.service"
+      },
+      {
+        "enabled": false,
+        "name": "rpm-ostree-countme.timer"
       }
     ]
   }
