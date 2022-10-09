@@ -46,7 +46,7 @@ storage:
         url: https://raw.githubusercontent.com/studioph/compose/master/portainer.yml
       - path: *compose-path
         mode: 0755
-        url: https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64
+        url: https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
     template:
       - path: /etc/selinux/config
         mode: 0600
