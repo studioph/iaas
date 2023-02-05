@@ -9,7 +9,7 @@ global:
   selinux:
     state: permissive
   update:
-    frequency: weekly
+    frequency: Sun 06:00
     timezone: America/New_York
 
   defaults:

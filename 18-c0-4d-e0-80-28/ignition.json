@@ -40,12 +40,14 @@
       {
         "path": "/etc/sysctl.d/20-silence-audit.conf",
         "contents": {
+          "compression": "",
           "source": "data:,kernel.printk%3D4"
         }
       },
       {
         "path": "/etc/hostname",
         "contents": {
+          "compression": "",
           "source": "data:,coreos"
         }
       },
@@ -58,7 +60,7 @@
       {
         "path": "/opt/bin/docker-compose",
         "contents": {
-          "source": "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64"
+          "source": "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64"
         },
         "mode": 493
       },
@@ -82,7 +84,8 @@
       {
         "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
         "contents": {
-          "source": "data:;base64,W2Nvbm5lY3Rpb25dCmlkPTEwZwp0eXBlPWV0aGVybmV0CmF1dG9jb25uZWN0PXRydWUKCltldGhlcm5ldF0KbWFjLWFkZHJlc3M9ZTQ6MWQ6MmQ6N2U6ZjQ6YzAKCltpcHY0XQphZGRyZXNzMT0xMC4wLjEwLjMvMjQKbWV0aG9kPW1hbnVhbApkaGNwLXRpbWVvdXQ9MQo="
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/zTKQQrDIBAF0P2/S1InFQrCnCRkIc60EaoGMxZ6+27S9XtrarVqstzqhixM7gX7Hspqu/aqhjisXYmtDwXWv20oMU1RpOt5svpAEhYJDw1PH5ID1nx8/IZrEJOb3Uxuvt8Wj6K2N+ES64hvyJ6OyXLRNowJvwAAAP//xQAk6ZgAAAA="
         },
         "mode": 384
       }
@@ -128,7 +131,7 @@
         "name": "portainer.service"
       },
       {
-        "contents": "[Unit]\nDescription=Reboot weekly\n\n[Timer]\nOnCalendar=weekly America/New_York\nRandomizedDelaySec=1h\nUnit=reboot.service\n\n[Install]\nWantedBy=timers.target\n",
+        "contents": "[Unit]\nDescription=Reboot Sun 06:00\n\n[Timer]\nOnCalendar=Sun 06:00 America/New_York\nRandomizedDelaySec=1h\nUnit=reboot.service\n\n[Install]\nWantedBy=timers.target\n",
         "enabled": true,
         "name": "reboot.timer"
       },
