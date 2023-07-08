@@ -1,0 +1,6 @@
+[updates]
+strategy = "periodic"
+[[updates.periodic.window]]
+days = {{ .Values.update.window.days | toJSON }}
+start_time = "{{ .Values.update.window.start }}"
+length_minutes = {{ .Values.update.window.length }}
