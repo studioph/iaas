@@ -75,7 +75,7 @@
         "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/zTMUQqEIBSF4fezlxxthEJwJdHDRS8VlIbeGtr9MEy9/nznDCGnxEGWnEYs0ZsJcu3sWWYuiQV0SL6Nl3IwYqpNPrk0slavgeGhIzYKDcVYuFZvehe0s9Gxdr12bQ8My37a8XfgjVZadVZ1FvfA/JtR71drMZHwh66nGWwsc45+o3TQim8AAAD//9PzSpG2AAAA"
+          "source": "data:;base64,H4sIAAAAAAAC/zTMQQqDMBBG4f1/F21iA5XAnERcDMmggiaSjBZvXwq6fXy8IeSUJOiS04glkp2g1y4kOktJouBD821IyyGIqTb5lNLoWskAw0NHbBwajrFIrWR7H4x30YvxvfFdDwzLfrrxPyBrWtPa9uNwe/uk96tzmFjly9fTLDbROUfaOB284hcAAP//ThgTMbUAAAA="
         },
         "mode": 384
       },
