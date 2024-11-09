@@ -10,6 +10,7 @@ global:
     state: permissive
   update:
     frequency: weekly
+    timezone: America/New_York
 
   defaults:
     storage:

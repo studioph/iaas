@@ -128,7 +128,7 @@
         "name": "portainer.service"
       },
       {
-        "contents": "[Unit]\nDescription=Reboot weekly\n\n[Timer]\nOnCalendar=weekly\nRandomizedDelaySec=1h\nUnit=reboot.service\n\n[Install]\nWantedBy=timers.target\n",
+        "contents": "[Unit]\nDescription=Reboot weekly\n\n[Timer]\nOnCalendar=weekly America/New_York\nRandomizedDelaySec=1h\nUnit=reboot.service\n\n[Install]\nWantedBy=timers.target\n",
         "enabled": true,
         "name": "reboot.timer"
       },
