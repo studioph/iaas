@@ -17,11 +17,11 @@ jobs:
       current-coreos-version: ${{ steps.fetch-current.outputs.content }}
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: Fetch latest CoreOS version from ${{ env.STREAM }} stream
         id: fetch-latest
-        uses: senmu/download-json-property-action@v1.1.0
+        uses: senmu/download-json-property-action@v1.5.0
         with:
           url: https://builds.coreos.fedoraproject.org/streams/${{ env.STREAM }}.json
           property_path: architectures.${{ env.ARCH }}.artifacts.metal.release
@@ -31,7 +31,7 @@ jobs:
 
       - name: Fetch currently used CoreOS version
         id: fetch-current
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@v1.1.7
         with:
           path: coreos/version
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: Update CoreOS version in Git
         run: printf "%s" ${{ needs.fetch-versions.outputs.latest-coreos-version }} > coreos/version
@@ -53,6 +53,6 @@ jobs:
         run: sed -i -E 's/VERSION [0-9\.]+/VERSION ${{ needs.fetch-versions.outputs.latest-coreos-version }}/' coreos/boot.ipxe
 
       - name: Commit updated version
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           commit_message: Update CoreOS version
