@@ -1,0 +1,10 @@
+[Unit]
+Description=Reboot {{ .Values.global.update.frequency }}
+
+[Timer]
+OnCalendar={{ .Values.global.update.frequency }}
+RandomizedDelaySec=1h
+Unit=reboot.service
+
+[Install]
+WantedBy=timers.target
