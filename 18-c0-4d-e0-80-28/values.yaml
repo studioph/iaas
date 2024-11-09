@@ -16,6 +16,8 @@ systemd:
     - name: reboot.service
       contents: global/reboot.service
       enabled: 'false'
+    - name: rpm-ostree-countme.service
+      enabled: 'false'
 
 storage:
   label: &docker-label docker
