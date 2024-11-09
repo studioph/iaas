@@ -1,0 +1,16 @@
+[Unit]
+Description=Install packages
+Wants=network-online.target
+After=network-online.target
+Before=zincati.service
+ConditionPathExists=!/var/lib/%N.stamp
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/rpm-ostree install --apply-live --allow-inactive $RPMS
+ExecStart=/bin/touch /var/lib/%N.stamp
+Environment=RPMS="{{ conv.Join .Values.rpms " " }}"
+
+[Install]
+WantedBy=multi-user.target
