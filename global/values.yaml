@@ -1,6 +1,6 @@
 global:
   network:
-    dns: 10.0.1.1
+    dns: 10.0.74.74
     gateway: 10.0.1.1
   docker:
     user: core
