@@ -20,8 +20,6 @@ systemd:
       enabled: 'false'
     - name: rpm-ostree-countme.timer
       enabled: 'false'
-    - name: rpm-install.service
-      contents: global/rpm-install.service
 
 storage:
   label: &docker-label docker
