@@ -11,6 +11,11 @@ systemd:
     - name: serial-getty@ttyS0.service
     - name: portainer.service
       contents: global/portainer.service
+    - name: reboot.timer
+      contents: global/reboot.timer
+    - name: reboot.service
+      contents: global/reboot.service
+      enabled: 'false'
 
 storage:
   label: &docker-label docker

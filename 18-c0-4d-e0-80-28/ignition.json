@@ -126,6 +126,16 @@
         "contents": "[Unit]\nDescription=Initialize Portainer\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Reboot weekly\n\n[Timer]\nOnCalendar=weekly\nRandomizedDelaySec=1h\nUnit=reboot.service\n\n[Install]\nWantedBy=timers.target\n",
+        "enabled": true,
+        "name": "reboot.timer"
+      },
+      {
+        "contents": "[Unit]\nDescription=Reboot server\n\n[Service]\nType=oneshot\nExecStart=/usr/sbin/reboot\n",
+        "enabled": false,
+        "name": "reboot.service"
       }
     ]
   }
