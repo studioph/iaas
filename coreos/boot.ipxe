@@ -1,7 +1,7 @@
 #!ipxe
 
 set STREAM stable
-set VERSION 40.20241019.3.0
+set VERSION 41.20241027.3.0
 set IGNITION_URL http://iaas.studiop:8000/${mac:hexhyp}/ignition.json
 set BASE_URL https://builds.coreos.fedoraproject.org/prod/streams/${STREAM}/builds/${VERSION}/x86_64
 
