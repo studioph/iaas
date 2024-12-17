@@ -55,4 +55,5 @@ jobs:
       - name: Commit updated version
         uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
-          commit_message: Update CoreOS version
+          commit_message: Update CoreOS version to ${{ needs.fetch-versions.outputs.latest-coreos-version }}
+          commit_author: Author <actions@github.com>
