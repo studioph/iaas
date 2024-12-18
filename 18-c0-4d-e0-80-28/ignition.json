@@ -18,7 +18,7 @@
   "storage": {
     "disks": [
       {
-        "device": "/dev/disk/by-id/ata-35002538d401140b0",
+        "device": "/dev/disk/by-id/scsi-35002538d401140b0",
         "partitions": [
           {
             "label": "docker"
@@ -27,7 +27,7 @@
         "wipeTable": true
       },
       {
-        "device": "/dev/disk/by-id/ata-35002538d4200cf5c",
+        "device": "/dev/disk/by-id/scsi-35002538d4200cf5c",
         "partitions": [
           {
             "label": "docker"
@@ -102,8 +102,8 @@
     "raid": [
       {
         "devices": [
-          "/dev/disk/by-id/ata-35002538d401140b0-part1",
-          "/dev/disk/by-id/ata-35002538d4200cf5c-part1"
+          "/dev/disk/by-id/scsi-35002538d401140b0-part1",
+          "/dev/disk/by-id/scsi-35002538d4200cf5c-part1"
         ],
         "level": "mirror",
         "name": "docker"

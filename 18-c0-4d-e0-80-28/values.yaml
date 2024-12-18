@@ -24,10 +24,10 @@ systemd:
 storage:
   label: &docker-label docker
   disks:
-    - device: &docker1 ata-35002538d401140b0
+    - device: &docker1 scsi-35002538d401140b0
       partitions:
         - label: *docker-label
-    - device: &docker2 ata-35002538d4200cf5c
+    - device: &docker2 scsi-35002538d4200cf5c
       partitions:
         - label: *docker-label
   raid:
