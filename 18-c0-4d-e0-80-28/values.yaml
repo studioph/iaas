@@ -1,6 +1,7 @@
 hostname: &hostname coreos
 docker:
   compose:
+    plugin: &compose-plugin /usr/local/lib/docker/cli-plugins/docker-compose
     stacks:
       portainer: &portainer-file /opt/docker/compose/portainer.yaml
 
@@ -43,6 +44,8 @@ storage:
     remote:
       - path: *portainer-file
         url: https://raw.githubusercontent.com/studioph/compose/master/portainer.yaml
+      - path: *compose-plugin
+        url: https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
     template:
       - path: /etc/selinux/config
         mode: 0600
