@@ -1,9 +1,8 @@
 hostname: &hostname coreos
 docker:
   compose:
-    path: &compose-path /opt/bin/docker-compose
     stacks:
-      portainer: &portainer-file /opt/docker-compose/portainer.yml
+      portainer: &portainer-file /opt/docker/compose/portainer.yaml
 
 systemd:
   units:
@@ -43,10 +42,7 @@ storage:
   files:
     remote:
       - path: *portainer-file
-        url: https://raw.githubusercontent.com/studioph/compose/master/portainer.yml
-      - path: *compose-path
-        mode: 0755
-        url: https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
+        url: https://raw.githubusercontent.com/studioph/compose/master/portainer.yaml
     template:
       - path: /etc/selinux/config
         mode: 0600
