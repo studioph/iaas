@@ -52,17 +52,16 @@
         }
       },
       {
-        "path": "/opt/docker-compose/portainer.yml",
+        "path": "/opt/docker/compose/portainer.yaml",
         "contents": {
-          "source": "https://raw.githubusercontent.com/studioph/compose/master/portainer.yml"
+          "source": "https://raw.githubusercontent.com/studioph/compose/master/portainer.yaml"
         }
       },
       {
-        "path": "/opt/bin/docker-compose",
+        "path": "/usr/local/lib/docker/cli-plugins/docker-compose",
         "contents": {
           "source": "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64"
-        },
-        "mode": 493
+        }
       },
       {
         "overwrite": true,
@@ -126,7 +125,7 @@
         "name": "serial-getty@ttyS0.service"
       },
       {
-        "contents": "[Unit]\nDescription=Initialize Portainer\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker-compose/portainer.yml\"\nExecStart=/opt/bin/docker-compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initialize Portainer\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nEnvironment=\"COMPOSE_PROJECT_NAME=portainer\"\nEnvironment=\"COMPOSE_FILE=/opt/docker/compose/portainer.yaml\"\nExecStart=docker compose up --detach\nUser=core\nGroup=core\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "portainer.service"
       },
