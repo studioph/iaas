@@ -1,0 +1,97 @@
+# Common values
+version:
+  talos: v1.10.4
+  k8s: v1.33.1
+registries:
+  local:
+    - https://registry.studiop.page
+    - http://init.k8s.studiop:8080
+  remote:
+    - name: docker.io
+      remote: registry-1.docker.io
+    - name: ghcr.io
+    - name: registry.k8s.io
+    - name: gcr.io
+    - name: quay.io
+    - name: lscr.io
+    - name: nvcr.io
+    - name: mcr.microsoft.com
+    - name: factory.talos.dev
+cluster:
+  name: studiop
+  endpoint: https://k8s.studiop:6443
+# Schematics are across *classes* of physical machines, not logical groups like controlplane/worker
+schematics:
+  controlplane:
+    id: 02f0a0d530104b00c9cbcf2ea010f6da4a92642f9874b6501d29d13f98f3a2bb
+    extensions:
+      - siderolabs/nut-client
+      - siderolabs/intel-ucode
+  nuc:
+    id: ac9faf97a61ea04d11245d01e0c76a6e1454c5c80674948d1e97a903c4e071f0
+    extensions:
+      - siderolabs/nut-client
+      - siderolabs/intel-ucode
+      - siderolabs/gvisor
+      - siderolabs/kata-containers
+      - siderolabs/i915-ucode
+      - siderolabs/nvidia-container-toolkit-production
+      - siderolabs/nvidia-open-gpu-kernel-modules-production
+      - siderolabs/thunderbolt
+    extraKernelArgs:
+      - intel_iommu=on # PCIe passthrough
+      - iommu=pt # PCIe passthrough
+# Control plane specific values
+controlplane:
+  vip: &vip 10.0.5.100
+# Worker specific values
+worker: {}
+# Node specific values
+nodes:
+  control_plane:
+    cp1.k8s.studiop:
+      schematic: controlplane
+      install_disk: naa.55cd2e4150946c4d
+      interfaces:
+        - name: eth
+          mac: 18:66:da:1f:d6:c2
+          vip: *vip
+    cp2.k8s.studiop:
+      schematic: controlplane
+      install_disk: naa.55cd2e404b4b4404
+      interfaces:
+        - name: eth
+          mac: 18:66:da:20:6a:fe
+          vip: *vip
+    cp3.k8s.studiop:
+      schematic: controlplane
+      install_disk: naa.55cd2e404c7a2616
+      interfaces:
+        - name: eth
+          mac: 18:66:da:22:5c:57
+          vip: *vip
+  worker:
+    wk1.k8s.studiop:
+      schematic: nuc
+      install_disk: naa.5002538d41c32b72
+      interfaces:
+        - name: 1g
+          mac: 54:b2:03:f7:1d:0c
+        - name: 10g
+          mac: 24:5e:be:85:17:00
+    wk2.k8s.studiop:
+      schematic: nuc
+      install_disk: naa.5001b444a9e8f974
+      interfaces:
+        - name: 1g
+          mac: 48:21:0b:37:e4:61
+        - name: 10g
+          mac: 24:5e:be:85:18:18
+    wk3.k8s.studiop:
+      schematic: nuc
+      install_disk: naa.538f601610587ce0
+      interfaces:
+        - name: 1g
+          mac: 48:21:0b:35:fd:ca
+        - name: 10g
+          mac: 24:5e:be:85:19:2e
