@@ -1,0 +1,165 @@
+version: v1alpha1
+debug: false
+persist: true
+machine:
+    type: controlplane
+    token: {{ .Secrets.trustdinfo.token }}
+    ca:
+        crt: {{ .Secrets.certs.os.crt }}
+        key: {{ .Secrets.certs.os.key }}
+    certSANs: []
+    kubelet:
+        image: ghcr.io/siderolabs/kubelet:v1.33.1
+        defaultRuntimeSeccompProfileEnabled: true
+        disableManifestsDirectory: true
+        extraConfig:
+          serializeImagePulls: false
+    install:
+        image: factory.talos.dev/installer/02f0a0d530104b00c9cbcf2ea010f6da4a92642f9874b6501d29d13f98f3a2bb:v1.10.4
+        wipe: false
+    registries:
+      mirrors:
+        docker.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://registry-1.docker.io
+        ghcr.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://ghcr.io
+        registry.k8s.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://registry.k8s.io
+        gcr.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://gcr.io
+        quay.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://quay.io
+        lscr.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://lscr.io
+        nvcr.io:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://nvcr.io
+        mcr.microsoft.com:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://mcr.microsoft.com
+        factory.talos.dev:
+          endpoints:
+            - https://registry.studiop.page
+            - http://init.k8s.studiop:8080
+            - https://factory.talos.dev
+    features:
+        rbac: true
+        stableHostname: true
+        apidCheckExtKeyUsage: true
+        diskQuotaSupport: true
+        kubePrism:
+            enabled: true
+            port: 7445
+        hostDNS:
+            enabled: true
+            forwardKubeDNSToHost: true
+    nodeLabels:
+        node.kubernetes.io/exclude-from-external-load-balancers: ""
+    files:
+        # Spegel
+      - op: create
+        path: /etc/cri/conf.d/20-customization.part
+        content: |
+          [plugins."io.containerd.cri.v1.images"]
+            discard_unpacked_layers = false
+cluster:
+    id: {{ .Secrets.cluster.id }}
+    secret: {{ .Secrets.cluster.secret }}
+    controlPlane:
+        endpoint: https://k8s.studiop:6443
+    clusterName: studiop
+    network:
+        dnsDomain: cluster.local
+        podSubnets:
+            - 10.244.0.0/16
+        serviceSubnets:
+            - 10.96.0.0/12
+        
+    token: {{ .Secrets.secrets.bootstraptoken }}
+    secretboxEncryptionSecret: {{ .Secrets.secrets.secretboxencryptionsecret }}
+    ca:
+        crt: {{ .Secrets.certs.k8s.crt }}
+        key: {{ .Secrets.certs.k8s.key }}
+    aggregatorCA:
+        crt: {{ .Secrets.certs.k8saggregator.crt }}
+        key: {{ .Secrets.certs.k8saggregator.key }}
+    serviceAccount:
+        key: {{ .Secrets.certs.k8sserviceaccount.key }}
+    apiServer:
+        image: registry.k8s.io/kube-apiserver:v1.33.1
+        certSANs:
+            - k8s.studiop
+        disablePodSecurityPolicy: true
+        admissionControl:
+            - name: PodSecurity
+              configuration:
+                apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+                defaults:
+                    audit: restricted
+                    audit-version: latest
+                    enforce: baseline
+                    enforce-version: latest
+                    warn: restricted
+                    warn-version: latest
+                exemptions:
+                    namespaces:
+                        - kube-system
+                    runtimeClasses: []
+                    usernames: []
+                kind: PodSecurityConfiguration
+        auditPolicy:
+            apiVersion: audit.k8s.io/v1
+            kind: Policy
+            rules:
+                - level: Metadata
+    controllerManager:
+        image: registry.k8s.io/kube-controller-manager:v1.33.1
+    proxy:
+        image: registry.k8s.io/kube-proxy:v1.33.1
+        
+    scheduler:
+        image: registry.k8s.io/kube-scheduler:v1.33.1
+    discovery:
+        enabled: true
+        registries:
+            kubernetes:
+                disabled: false
+            service:
+              disabled: true
+    etcd:
+        ca:
+            crt: {{ .Secrets.certs.etcd.crt }}
+            key: {{ .Secrets.certs.etcd.key }}
+    extraManifests: []
+    inlineManifests: []
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: nut-client
+configFiles:
+  - content: |-
+        MONITOR opn1.k8s.studiop 1 monuser {{ .Secrets.nut.password }} secondary
+        SHUTDOWNCMD "/sbin/poweroff"
+    mountPath: /usr/local/etc/nut/upsmon.conf
