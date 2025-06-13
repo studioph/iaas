@@ -1,0 +1,20 @@
+inputFiles:
+  - templates/render.tpl
+  - templates/controlplane.yaml.tpl
+  - templates/nuc.yaml.tpl
+outputFiles:
+  - configs/.render
+  - configs/controlplane.yaml
+  - configs/nuc.yaml
+
+templates:
+  node:
+    url: templates/node.yaml.tpl
+  registries:
+    url: templates/registries.yaml.tpl
+  schematic:
+    url: templates/schematic.yaml.tpl
+
+context:
+  Values:
+    url: values.yaml
