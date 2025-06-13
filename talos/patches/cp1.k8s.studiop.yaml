@@ -1,0 +1,12 @@
+machine:
+  install:
+    diskSelector:
+      wwid: naa.55cd2e4150946c4d
+  network:
+    hostname: cp1.k8s.studiop
+    interfaces:
+      - deviceSelector:
+          hardwareAddr: 18:66:da:1f:d6:c2
+        dhcp: true
+        vip:
+          ip: 10.0.5.100

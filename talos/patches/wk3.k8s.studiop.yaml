@@ -1,0 +1,13 @@
+machine:
+  install:
+    diskSelector:
+      wwid: naa.538f601610587ce0
+  network:
+    hostname: wk3.k8s.studiop
+    interfaces:
+      - deviceSelector:
+          hardwareAddr: 48:21:0b:35:fd:ca
+        dhcp: true
+      - deviceSelector:
+          hardwareAddr: 24:5e:be:85:19:2e
+        dhcp: true
