@@ -1,0 +1,15 @@
+customization:
+  extraKernelArgs:
+    - intel_iommu=on
+    - iommu=pt
+
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/nut-client
+      - siderolabs/intel-ucode
+      - siderolabs/gvisor
+      - siderolabs/kata-containers
+      - siderolabs/i915-ucode
+      - siderolabs/nvidia-container-toolkit-production
+      - siderolabs/nvidia-open-gpu-kernel-modules-production
+      - siderolabs/thunderbolt
