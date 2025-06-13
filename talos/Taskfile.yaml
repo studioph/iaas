@@ -1,0 +1,127 @@
+version: '3'
+
+vars:
+  __VALUES_JSON:
+    sh: yq --output-format=json < values.yaml
+  values:
+    ref: fromJson .__VALUES_JSON
+  CP_NODES:
+    ref: .values.nodes.control_plane
+  WK_NODES:
+    ref: .values.nodes.worker
+  SCHEMATICS:
+    ref: keys .values.schematics
+
+tasks:
+  reset-node:
+    desc: Reset a single Talos node
+    cmd: talosctl reset {{ if .SOFT }} --system-labels-to-wipe {{ .LABELS | join "," }} {{ end }} --reboot --wait --graceful={{ .GRACEFUL }} --nodes {{ .NODES }} {{ .CLI_ARGS }}
+    vars:
+      LABELS:
+        - STATE
+        - EPHEMERAL
+        - META
+      GRACEFUL: '{{ .GRACEFUL | default true }}'
+
+  reset:
+    desc: Reset the entire Talos cluster
+    aliases:
+      - destroy
+      - down
+    vars:
+      _CP_NODES:
+        ref: keys .CP_NODES
+    cmds:
+      - task: reset-node
+        vars:
+          NODES: '{{ keys .WK_NODES | join "," }}'
+        # Reset control plane nodes individually to avoid weirdness
+      - for:
+          var: _CP_NODES
+        task: reset-node
+        vars:
+          NODES: '{{ .ITEM }}'
+          GRACEFUL: '{{ not (eq .ITEM (last ._CP_NODES)) }}'
+
+  schematic:
+    desc: Render Talos schematics
+    cmds:
+      - gomplate --file templates/schematic.tpl --out schematics/.render --template schematic=templates/schematic.yaml.tpl --context Values=values.yaml
+      - for:
+          var: SCHEMATICS
+        # Update the schematic ID in values.yaml
+        cmd: curl -X POST --data-binary @schematics/{{ .ITEM }}.yaml https://factory.talos.dev/schematics | yq '.id' | yq --inplace eval-all 'select(fileIndex==0) as $values | select(fileIndex==1) as $id | $values.schematics.{{ .ITEM }}.id = $id | $values'  values.yaml -
+    sources:
+      - values.yaml
+      - templates/schematic*
+    generates:
+      - schematics/*.yaml
+
+  template:
+    desc: Render Talos config templates
+    aliases:
+      - render
+    cmd: gomplate --config .gomplate.render.yaml
+    deps:
+      - schematic
+    sources:
+      - templates/*.tpl
+      - values.yaml
+    generates:
+      - patches/*.yaml
+      - configs/*.yaml
+
+  apply-node:
+    desc: Apply Talos configuration to a single node
+    cmd: gomplate --file configs/{{ .SCHEMATIC }}.yaml --context Secrets=.secret/secrets.yaml | talosctl apply --nodes {{ .NODE }} --endpoints {{ .NODE }} --file /dev/stdin --config-patch @patches/{{ .NODE }}.yaml --insecure
+    deps:
+      - template
+
+  apply-controlplane:
+    desc: Apply Talos control plane configuration
+    deps:
+      - template
+    cmds:
+      - for:
+          var: CP_NODES
+          as: node
+        task: apply-node
+        vars:
+          NODE: "{{ .KEY }}"
+          SCHEMATIC: "{{ .node.schematic }}"
+
+  apply-worker:
+    desc: Apply Talos worker configuration
+    deps:
+      - template
+    cmds:
+      - for:
+          var: WK_NODES
+          as: node
+        task: apply-node
+        vars:
+          NODE: "{{ .KEY }}"
+          SCHEMATIC: "{{ .node.schematic }}"
+        
+  apply:
+    desc: Apply Talos configuration
+    cmds:
+      - task: apply-controlplane
+      - task: apply-worker
+  
+  bootstrap:
+    desc: Bootstrap Talos cluster
+    cmd: until talosctl bootstrap --nodes {{ keys .CP_NODES | first }} &> /dev/null; do sleep 10; done
+
+  kubeconfig:
+    desc: Download Kubeconfig for Talos cluster
+    cmd: talosctl kubeconfig --nodes {{ keys .CP_NODES | first }}
+
+  create:
+    desc: Initialize Talos k8s cluster
+    aliases:
+      - up
+    cmds:
+      - task: apply
+      - task: bootstrap
+      - task: kubeconfig
