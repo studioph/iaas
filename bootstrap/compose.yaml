@@ -1,0 +1,36 @@
+services:
+  # Container registry cache
+  registry:
+    container_name: oci-registry
+    image: docker.io/mcronce/oci-registry:v0.4.5
+    ports:
+      - 8080:80
+    command:
+      - --listen
+      - 0.0.0.0:80
+      - filesystem
+      - --root
+      - /data
+    volumes:
+      - data:/data
+    networks:
+      - init
+
+  # Web server to host boot assets
+  nginx:
+    container_name: nginx
+    image: docker.io/library/nginx:1.28.0
+    ports:
+      - 8000:80
+    volumes:
+      - ./assets:/usr/share/nginx/html:ro
+    networks:
+      - init
+
+
+volumes:
+  data:
+    name: registry
+networks:
+  init:
+    name: k8s-init
