@@ -21,47 +21,47 @@ machine:
       mirrors:
         docker.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://registry-1.docker.io
         ghcr.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://ghcr.io
         registry.k8s.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://registry.k8s.io
         gcr.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://gcr.io
         quay.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://quay.io
         lscr.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://lscr.io
         nvcr.io:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://nvcr.io
         mcr.microsoft.com:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://mcr.microsoft.com
         factory.talos.dev:
           endpoints:
-            - https://registry.studiop.page
+            - https://registry.cloud.studiop.page
             - http://init.k8s.studiop:8080
             - https://factory.talos.dev
     features:

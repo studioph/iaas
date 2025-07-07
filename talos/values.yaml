@@ -4,7 +4,7 @@ version:
   k8s: v1.33.1
 registries:
   local:
-    - https://registry.studiop.page
+    - https://registry.cloud.studiop.page
     - http://init.k8s.studiop:8080
   remote:
     - name: docker.io
