@@ -149,3 +149,31 @@ tasks:
         task: reboot-node
         vars:
           NODES: "{{ .KEY }}"
+
+  upgrade-node:
+    desc: Upgrades a Talos node
+    cmd: talosctl upgrade --image {{ .IMAGE }} --nodes {{ .NODE }} {{ .CLI_ARGS }}
+
+  upgrade-wk:
+    desc: Upgrades worker nodes
+    cmds:
+      - for:
+          var: WK_NODES
+          as: node
+        task: upgrade-node
+        vars:
+          NODE: "{{ .KEY }}"
+          IMAGE:
+            sh: yq 'select(document_index == 0) | .machine.install.image' configs/{{ .node.schematic }}.yaml
+
+  upgrade-cp:
+    desc: Upgrades control plane nodes
+    cmds:
+      - for:
+          var: CP_NODES
+          as: node
+        task: upgrade-node
+        vars:
+          NODE: "{{ .KEY }}"
+          IMAGE:
+            sh: yq 'select(document_index == 0) | .machine.install.image' configs/{{ .node.schematic }}.yaml
