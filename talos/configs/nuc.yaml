@@ -15,7 +15,7 @@ machine:
         extraConfig:
           serializeImagePulls: false
     install:
-        image: factory.talos.dev/installer/ac9faf97a61ea04d11245d01e0c76a6e1454c5c80674948d1e97a903c4e071f0:v1.10.4
+        image: factory.talos.dev/installer/743c62fd33df9ff6adcd26bb673bb0aae56d6faaf4eb2a65389d9a1010145ff9:v1.10.5
         wipe: false
     registries:
       mirrors:
@@ -97,6 +97,7 @@ machine:
           - name: nvidia_uvm
           - name: nvidia_drm
           - name: nvidia_modeset
+          - name: zfs
 cluster:
     id: {{ .Secrets.cluster.id }}
     secret: {{ .Secrets.cluster.secret }}

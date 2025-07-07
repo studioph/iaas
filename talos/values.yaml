@@ -28,7 +28,7 @@ schematics:
       - siderolabs/nut-client
       - siderolabs/intel-ucode
   nuc:
-    id: ac9faf97a61ea04d11245d01e0c76a6e1454c5c80674948d1e97a903c4e071f0
+    id: 743c62fd33df9ff6adcd26bb673bb0aae56d6faaf4eb2a65389d9a1010145ff9
     extensions:
       - siderolabs/nut-client
       - siderolabs/intel-ucode
@@ -38,6 +38,7 @@ schematics:
       - siderolabs/nvidia-container-toolkit-production
       - siderolabs/nvidia-open-gpu-kernel-modules-production
       - siderolabs/thunderbolt
+      - siderolabs/zfs
     extraKernelArgs:
       - intel_iommu=on # PCIe passthrough
       - iommu=pt # PCIe passthrough

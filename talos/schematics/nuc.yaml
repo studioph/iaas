@@ -13,3 +13,4 @@ customization:
       - siderolabs/nvidia-container-toolkit-production
       - siderolabs/nvidia-open-gpu-kernel-modules-production
       - siderolabs/thunderbolt
+      - siderolabs/zfs

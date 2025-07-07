@@ -48,6 +48,7 @@ machine:
           - name: nvidia_uvm
           - name: nvidia_drm
           - name: nvidia_modeset
+          - name: zfs
     nodeLabels:
       node-role.kubernetes.io/worker: ""
 cluster:
