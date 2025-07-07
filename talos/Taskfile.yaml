@@ -73,7 +73,7 @@ tasks:
 
   apply-node:
     desc: Apply Talos configuration to a single node
-    cmd: gomplate --file configs/{{ .SCHEMATIC }}.yaml --context Secrets=.secret/secrets.yaml | talosctl apply --nodes {{ .NODE }} --endpoints {{ .NODE }} --file /dev/stdin --config-patch @patches/{{ .NODE }}.yaml --insecure
+    cmd: gomplate --file configs/{{ .SCHEMATIC }}.yaml --context Secrets=.secret/secrets.yaml | talosctl apply --nodes {{ .NODE }} --file /dev/stdin --config-patch @patches/{{ .NODE }}.yaml {{ .EXTRA_ARGS }} {{ .CLI_ARGS }}
     deps:
       - template
 
@@ -123,5 +123,7 @@ tasks:
       - up
     cmds:
       - task: apply
+        vars:
+          EXTRA_ARGS: --insecure
       - task: bootstrap
       - task: kubeconfig
