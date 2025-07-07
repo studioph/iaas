@@ -80,6 +80,10 @@ cluster:
                 exemptions:
                     namespaces:
                         - kube-system
+                        - rook-ceph
+                        - openebs
+                        - spegel
+                        - metallb-system
                     runtimeClasses: []
                     usernames: []
                 kind: PodSecurityConfiguration
