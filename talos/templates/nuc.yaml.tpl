@@ -24,7 +24,7 @@ machine:
         apidCheckExtKeyUsage: true
         diskQuotaSupport: true
         kubePrism:
-            enabled: true
+            enabled: false
             port: 7445
         hostDNS:
             enabled: true
@@ -70,8 +70,6 @@ cluster:
     discovery:
         enabled: true
         registries:
-            kubernetes:
-                disabled: false
             service:
               disabled: true
 ---
