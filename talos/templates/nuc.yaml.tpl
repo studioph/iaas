@@ -52,7 +52,9 @@ machine:
     sysctls:
       net.core.bpf_jit_harden: 1
     nodeLabels:
-      node-role.kubernetes.io/worker: ""
+      node.kubernetes.io/role: worker
+      disktype: nvme
+      storagetype: local
 cluster:
     id: {{ "{{ .Secrets.cluster.id }}" }}
     secret: {{ "{{ .Secrets.cluster.secret }}" }}
