@@ -82,9 +82,6 @@ machine:
         content: |
           [plugins."io.containerd.cri.v1.images"]
             discard_unpacked_layers = false
-    time:
-      servers:
-        - opn1.k8s.studiop
     udev:
       rules:
         - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660" # Intel GPU
@@ -98,6 +95,8 @@ machine:
           - name: nvidia_drm
           - name: nvidia_modeset
           - name: zfs
+    sysctls:
+      net.core.bpf_jit_harden: 1
 cluster:
     id: {{ .Secrets.cluster.id }}
     secret: {{ .Secrets.cluster.secret }}

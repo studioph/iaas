@@ -49,6 +49,8 @@ machine:
           - name: nvidia_drm
           - name: nvidia_modeset
           - name: zfs
+    sysctls:
+      net.core.bpf_jit_harden: 1
     nodeLabels:
       node-role.kubernetes.io/worker: ""
 cluster:
