@@ -127,3 +127,25 @@ tasks:
           EXTRA_ARGS: --insecure
       - task: bootstrap
       - task: kubeconfig
+
+  reboot-node:
+    desc: Reboots a single node
+    cmd: talosctl reboot --nodes {{ .NODES }}
+
+  reboot-cp:
+    desc: Reboot all Control Plane nodes
+    cmds:
+      - for:
+          var: CP_NODES
+        task: reboot-node
+        vars:
+          NODES: "{{ .KEY }}"
+
+  reboot-wk:
+    desc: Reboots all Worker nodes
+    cmds:
+      - for:
+          var: WK_NODES
+        task: reboot-node
+        vars:
+          NODES: "{{ .KEY }}"
