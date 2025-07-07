@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zpool-create-script
+  namespace: kube-system
+data:
+  create.sh: |-
+    #!/bin/sh
+
+    set -euo pipefail
+    IFS=$'\n\t'
+
+    POOL_NAME="$1"
+    DISK="$2"
+
+    # ZFS utils must exist on host
+    # Check if pool already exists and can be imported
+    if chroot /host zpool import | grep "$POOL_NAME"; then
+      # Import the pool
+      echo "Importing existing pool $POOL_NAME"
+      chroot /host zpool import "$POOL_NAME"
+    else
+      # Create the pool
+      echo "Creating pool $POOL_NAME on disk $DISK"
+      blkdiscard "$DISK"
+
+      chroot /host zpool create \
+        -o ashift=12 \
+        -O mountpoint="/var/mnt/$POOL_NAME" \
+        -O xattr=sa \
+        -O acltype=posixacl \
+        -O atime=off \
+        "$POOL_NAME" \
+        "$DISK"
+    fi
+
+    echo Done
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: zpool-create
+  name: zpool-create
+  namespace: kube-system
+spec:
+  backoffLimit: 3
+  completionMode: Indexed
+  completions: 3
+  parallelism: 3
+  template:
+    metadata:
+      labels:
+        job-name: zpool-create
+      name: zpool-create
+    spec:
+      containers:
+      - command:
+          - /bin/sh
+        args:
+        - /scripts/create.sh
+        - openebs
+        - /dev/nvme0n1
+        image: docker.io/library/alpine:3.22
+        imagePullPolicy: IfNotPresent
+        name: zpool-create
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 100Mi
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        volumeMounts:
+        - name: host-root
+          mountPath: /host
+        - name: script-vol
+          mountPath: /scripts
+      restartPolicy: OnFailure
+      nodeSelector:
+        storagetype: local
+        disktype: nvme
+      volumes:
+      - name: host-root
+        hostPath:
+          path: /
+      - name: script-vol
+        configMap:
+          name: zpool-create-script
+          defaultMode: 0777
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              job-name: zpool-create
