@@ -11,3 +11,5 @@ machine:
       - deviceSelector:
           hardwareAddr: 24:5e:be:85:17:00
         dhcp: true
+  nodeAnnotations:
+    zfs.localpv.openebs.io/diskid: eui.335747304d5056600025384500000001

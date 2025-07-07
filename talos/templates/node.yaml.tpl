@@ -14,3 +14,7 @@ machine:
           ip: {{ .vip }}
   {{- end }}
 {{- end }}
+{{- if (has . "annotations") }}
+  nodeAnnotations:
+    {{ .annotations | toYAML }}
+{{- end }}
