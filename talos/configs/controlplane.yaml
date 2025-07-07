@@ -15,7 +15,7 @@ machine:
         extraConfig:
           serializeImagePulls: false
     install:
-        image: factory.talos.dev/installer/02f0a0d530104b00c9cbcf2ea010f6da4a92642f9874b6501d29d13f98f3a2bb:v1.10.4
+        image: factory.talos.dev/installer/02f0a0d530104b00c9cbcf2ea010f6da4a92642f9874b6501d29d13f98f3a2bb:v1.10.5
         wipe: false
     registries:
       mirrors:

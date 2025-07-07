@@ -1,6 +1,6 @@
 # Common values
 version:
-  talos: v1.10.4
+  talos: v1.10.5
   k8s: v1.33.1
 registries:
   local:
