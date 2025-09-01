@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Dockge
+
+[Service]
+Type=exec
+Environment="COMPOSE_PROJECT_NAME=dockge"
+Environment="COMPOSE_FILE=/opt/stacks/dockge.yaml"
+ExecStart=podman-compose up --detach
+User=container
+Group=container
+
+[Install]
+WantedBy=multi-user.target

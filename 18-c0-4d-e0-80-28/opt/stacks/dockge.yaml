@@ -1,0 +1,24 @@
+services:
+  dockge:
+    image: docker.io/louislam/dockge:1.5.0
+    ports:
+      - 9001:5001
+    environment:
+      DOCKGE_STACKS_DIR: /opt/stacks
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - data:/app/data
+      - stacks:/opt/stacks
+    restart: unless-stopped
+    networks:
+      - dockge
+
+networks:
+  dockge:
+    name: dockge
+
+volumes:
+  data:
+    name: dockge-data
+  stacks:
+    name: dockge-stacks

@@ -1,0 +1,11 @@
+[Unit]
+Description=Apply bootc updates
+Documentation=man:bootc(8)
+ConditionPathExists=/run/ostree-booted
+
+[Timer]
+OnCalendar=Sun 06:00 America/New_York
+RandomizedDelaySec=5m
+
+[Install]
+WantedBy=timers.target

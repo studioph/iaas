@@ -1,0 +1,28 @@
+FROM quay.io/fedora/fedora-bootc:43.20250718.0
+ARG USERNAME=container
+
+RUN dnf install -y \
+    podman-docker \
+    podman-compose \
+    htop \
+    pciutils \
+    usbutils \
+    net-tools \
+    bind-utils \
+    && dnf clean all
+
+COPY etc /etc
+COPY opt /opt
+COPY usr /usr
+
+RUN useradd \
+    --user-group \
+    --create-home \
+    --groups wheel \
+    --uid 1000 \
+    ${USERNAME}
+
+COPY home /home
+RUN chmod 0700 /home/${USERNAME}/.ssh && \
+    chmod 0600 /home/${USERNAME}/.ssh/authorized_keys && \
+    chown -R ${USERNAME}: /home/${USERNAME}
