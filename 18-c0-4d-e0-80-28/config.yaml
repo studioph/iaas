@@ -1,0 +1,13 @@
+# Manually specify a local image file
+image-file: /data/fedora-coreos-42.20250803.3.0-metal.x86_64.raw.xz
+# Embed an Ignition config from a file
+ignition-file: ignition.json
+
+# Kernel and bootloader console
+console:
+  - ttyS0,115200n8
+# Force offline installation
+offline: true
+insecure: true
+# Destination device
+dest-device: /dev/disk/by-id/ata-Samsung_SSD_850_EVO_1TB_S2RENX0J509758B
