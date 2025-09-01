@@ -2,7 +2,7 @@ variant: fcos
 version: 1.6.0
 systemd:
   units:
-    - name: docker.service
+    - name: podman.service
       enabled: true
     - name: serial-getty@ttyS0.service
       enabled: true
