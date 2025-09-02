@@ -1,0 +1,13 @@
+[Unit]
+Description=Media
+Before=containerd.service
+After=network-online.target
+
+[Mount]
+What=truenas.g10.studiop:/mnt/storage/media
+Where=/var/mnt/media
+Type=nfs
+Options=_netdev,auto,addr=truenas.g10.studiop,rw,nolock,proto=tcp,rsize=1048576,wsize=1048576,timeo=15,nfsvers=4
+
+[Install]
+WantedBy=multi-user.target
