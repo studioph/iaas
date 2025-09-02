@@ -4,6 +4,8 @@ systemd:
   units:
     - name: podman.service
       enabled: true
+    - name: podman.socket
+      enabled: true
     - name: serial-getty@ttyS0.service
       enabled: true
     - name: rpm-ostree-countme.service
@@ -32,6 +34,38 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree install -y --allow-inactive podman-compose htop pciutils usbutils net-tools bind-utils
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: var-mnt-media.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Media
+        Before=containerd.service
+        After=network-online.target
+
+        [Mount]
+        What=truenas.g10.studiop:/mnt/storage/media
+        Where=/var/mnt/media
+        Type=nfs
+        Options=_netdev,auto,addr=truenas.g10.studiop,rw,nolock,proto=tcp,rsize=1048576,wsize=1048576,timeo=15,nfsvers=4
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: var-mnt-downloads.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Downloads
+        Before=containerd.service
+        After=network-online.target
+
+        [Mount]
+        What=qnap.studiop:/mnt/storage/downloads
+        Where=/var/mnt/downloads
+        Type=nfs
+        Options=_netdev,auto,addr=qnap.studiop,rw,nolock,proto=tcp,rsize=1048576,wsize=1048576,timeo=15,nfsvers=4
 
         [Install]
         WantedBy=multi-user.target
