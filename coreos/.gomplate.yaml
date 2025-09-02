@@ -8,5 +8,7 @@ postExec:
   - ignition.json
 
 templates:
-  - files=files/
-  - units=units/
+  files:
+    url: ./files/
+  units:
+    url: ./units/
