@@ -1,5 +1,0 @@
-stream: stable
-architecture: aarch64
-ignition-file: out/ignition.json
-console:
-  - ttyAMA0,115200n8

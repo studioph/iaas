@@ -1,3 +1,0 @@
-#!ipxe
-
-chain ${mac:hexhyp}/boot.ipxe
