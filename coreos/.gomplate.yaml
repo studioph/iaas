@@ -1,0 +1,12 @@
+inputFiles:
+  - butane.yaml.tpl
+execPipe: true
+postExec:
+  - butane
+  - --pretty
+  - --output
+  - ignition.json
+
+templates:
+  - files=files/
+  - units=units/

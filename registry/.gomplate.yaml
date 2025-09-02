@@ -1,9 +1,0 @@
-inputDir: templates
-outputMap: out/{{ .in | replaceAll ".yaml.tpl" ".yaml" }}
-
-context:
-  Values:
-    url: values.yaml
-
-templates:
-  - files=templates/files/

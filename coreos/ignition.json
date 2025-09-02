@@ -1,0 +1,114 @@
+{
+  "ignition": {
+    "version": "3.5.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "docker"
+        ],
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCn5exRlpq7WUhbhBwkNbsUBO/7HdpcP3HadkL9/V3ug7fY90QoIIk935JDH5mBfgLblIEUDzSFSUvUVnKe+epETQysPiVSF06+9iz63/uKlr7mrvlmC3Pmh726MLNLpDVqrJ2g4tjmC2iJpyc5sAKoQsJPv/7Pi2DlVOVAs1H7ci3uclnyT2ou13Sj5rImLqcgT22DFqDraEDWlwuMIYr1epxpjbUmx9hjB/SNWXFm/O75naV8LfderZ2WyI1j75rqkDBEXcHYd/SCPM58u9FlHeXJNkxr9rWRGpinqLEuj0hSFdvilKFZtawHSZ4ha4UGWFbywaxoDTsErLg8VGyG7w8m541YjbCKE+/7znbfsv8AqrYj3Hx5oV8SQwKTu75XxvHzmY37QVvPInZiSk1QeKpTUEqVc9duH9zDyNvje/qMtpsSYee/gTGFt+p2SX2kNW4t7PRLG93E9Kcbn/0IjFZ6snXbrOGcuV8ohervtD2Cmzubgi0wlfiltgDQnvs= paul@studiop-dev"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "overwrite": true,
+        "path": "/etc/selinux/config",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/3SQz2pyMRTE9z7FgNtPH+CDLl0UrBS00C7TZPQeGnMuOedqfftyteYWSrPKnzPzm8kcu04Me8lE1OJVs8E7wjw4oXtsV2spwye03O4v5jwuZ/Px4XHz8vqAGAo8fBBargrvaIR3lcQp5IH2fzbHbbHstUYpByyaszEOVfyCXrPEC8S+x5iWTdizHsVMTvyh7KsUN5xDLVIOBinmDGkM0UCTRRIL75kJC2x08mjQrCGNyHuxCTm13b09r/5sfNZffT3UA/3K3N23fdVIMxpC5XhyRmf610THbFjgacguWPPEjG37otu0aGk5r5HunNlXAAAA//9vql2W0QEAAA=="
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/1g.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/0TMQQqDMBBG4f1/F21iXUhgTiIuhmRQQRNJJhZvXwpKt4+PN/oUo3hdU5ywBrIz9DqERBfJURRcNd2GNFdBiKVJp+RGt0IGGB86YWffcAhZSiE7OG9cH5wYNxjXDcC4Hmc//QZkTWta21rc3D7l/ep6zKzy4euvdtElBdo5Vt7wDQAA//+ti7JHtAAAAA=="
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/10g.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/zTKQQrDIBAF0P2/S1InFQrCnCRkIc60EaoGMxZ6+27S9XtrarVqstzqhixM7gX7Hspqu/aqhjisXYmtDwXWv20oMU1RpOt5svpAEhYJDw1PH5ID1nx8/IZrEJOb3Uxuvt8Wj6K2N+ES64hvyJ6OyXLRNowJvwAAAP//xQAk6ZgAAAA="
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/sysctl.d/20-silence-audit.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,kernel.printk%3D4"
+        }
+      },
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,coreos"
+        }
+      },
+      {
+        "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bidentity%5D%0Arollout_wariness%20%3D%200.5%0A"
+        }
+      },
+      {
+        "path": "/etc/zincati/config.d/55-updates-strategy.toml",
+        "contents": {
+          "compression": "",
+          "source": "data:;base64,W3VwZGF0ZXNdCnN0cmF0ZWd5ID0gInBlcmlvZGljIgpbW3VwZGF0ZXMucGVyaW9kaWMud2luZG93XV0KZGF5cyA9IFsiU3VuIl0Kc3RhcnRfdGltZSA9ICI1OjAwIgpsZW5ndGhfbWludXRlcyA9IDYwCg=="
+        }
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "enabled": true,
+        "name": "podman.service"
+      },
+      {
+        "enabled": true,
+        "name": "podman.socket"
+      },
+      {
+        "enabled": true,
+        "name": "serial-getty@ttyS0.service"
+      },
+      {
+        "enabled": false,
+        "name": "rpm-ostree-countme.service"
+      },
+      {
+        "enabled": false,
+        "name": "rpm-ostree-countme.timer"
+      },
+      {
+        "contents": "[Unit]\nDescription=Layer packages with rpm-ostree\nWants=network-online.target\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\n# `--allow-inactive` ensures that rpm-ostree does not return an error\n# if the package is already installed. This is useful if the package is\n# added to the root image in a future Fedora CoreOS release as it will\n# prevent the service from failing.\nExecStart=/usr/bin/rpm-ostree install -y --allow-inactive podman-compose htop pciutils usbutils net-tools bind-utils\nExecStart=/bin/touch /var/lib/%N.stamp\nExecStart=/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "install-packages.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Media\nBefore=containerd.service\nAfter=network-online.target\n\n[Mount]\nWhat=truenas.g10.studiop:/mnt/storage/media\nWhere=/var/mnt/media\nType=nfs\nOptions=_netdev,auto,addr=truenas.g10.studiop,rw,nolock,proto=tcp,rsize=1048576,wsize=1048576,timeo=15,nfsvers=4\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "var-mnt-media.mount"
+      },
+      {
+        "contents": "[Unit]\nDescription=Downloads\nBefore=containerd.service\nAfter=network-online.target\n\n[Mount]\nWhat=qnap.studiop:/mnt/storage/downloads\nWhere=/var/mnt/downloads\nType=nfs\nOptions=_netdev,auto,addr=qnap.studiop,rw,nolock,proto=tcp,rsize=1048576,wsize=1048576,timeo=15,nfsvers=4\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "var-mnt-downloads.mount"
+      }
+    ]
+  }
+}

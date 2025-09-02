@@ -1,6 +1,0 @@
-[Unit]
-Description=Reboot server
-
-[Service]
-Type=oneshot
-ExecStart=/usr/sbin/reboot
